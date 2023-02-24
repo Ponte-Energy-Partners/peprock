@@ -1,0 +1,52 @@
+name: Release
+
+run-name: ${{ github.actor }} is releasing peprock 🚀
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        description: 'Increment'
+        type: choice
+        options:
+          - ""
+          - "MAJOR"
+          - "MINOR"
+          - "PATCH"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: poetry
+      - id: cz
+        name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@0.16.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          increment: ${{ inputs.increment }}
+          check_consistency: true
+      - name: Build package
+        run: poetry build
+      - name: Release to GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+          tag_name: ${{ steps.cz.outputs.version }}
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+      - run: echo "🍏 This job's status is ${{ job.status }}."
