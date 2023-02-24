@@ -49,4 +49,9 @@ jobs:
           tag_name: ${{ steps.cz.outputs.version }}
           fail_on_unmatched_files: true
           generate_release_notes: true
+      - name: Publish peprock 📦 to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
       - run: echo "🍏 This job's status is ${{ job.status }}."
