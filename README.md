@@ -6,3 +6,4 @@ Foundational Python library
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
 [![codecov](https://codecov.io/gh/Ponte-Energy-Partners/peprock/branch/main/graph/badge.svg?token=LWI96U2WSI)](https://codecov.io/gh/Ponte-Energy-Partners/peprock)
 [![test](https://github.com/Ponte-Energy-Partners/peprock/actions/workflows/test.yml/badge.svg)](https://github.com/Ponte-Energy-Partners/peprock/actions/workflows/test.yml)
+[![PyPI version](https://badge.fury.io/py/peprock.svg)](https://badge.fury.io/py/peprock)
