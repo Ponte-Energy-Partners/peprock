@@ -1,0 +1,2 @@
+# peprock
+Foundational Python library
