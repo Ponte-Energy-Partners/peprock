@@ -33,6 +33,12 @@ _VARIABLE_OFFSET_ZONE_INFO: typing.Final[zoneinfo.ZoneInfo] = zoneinfo.ZoneInfo(
     "Europe/Paris",
 )
 
+_ZONE_INFOS: typing.Final[tuple[datetime.tzinfo, ...]] = (
+    _UTC_TZINFO,
+    _FIXED_OFFSET_ZONE_INFO,
+    _VARIABLE_OFFSET_ZONE_INFO,
+)
+
 
 @pytest.mark.parametrize(
     ("arg", "is_naive"),
@@ -111,3 +117,51 @@ def test_is_naive_is_aware(arg: typing.Any, is_naive: bool | None) -> None:
         case _:
             assert peprock.datetime.is_naive(arg) == is_naive
             assert peprock.datetime.is_aware(arg) != is_naive
+
+
+@pytest.mark.parametrize(
+    "target_tz",
+    [None, *(pytest.param(tzinfo, id=str(tzinfo)) for tzinfo in _ZONE_INFOS)],
+)
+@pytest.mark.parametrize(
+    "assumed_tz",
+    [None, *(pytest.param(tzinfo, id=str(tzinfo)) for tzinfo in _ZONE_INFOS)],
+)
+@pytest.mark.parametrize(
+    "arg",
+    [
+        pytest.param(
+            _DATETIME,
+            id="naive datetime",
+        ),
+        *(
+            pytest.param(
+                _DATETIME.replace(tzinfo=tzinfo),
+                id=f"aware datetime ({tzinfo})",
+            )
+            for tzinfo in _ZONE_INFOS
+        ),
+    ],
+)
+def test_ensure_aware_2(arg, assumed_tz, target_tz) -> None:
+    if peprock.datetime.is_naive(arg) and assumed_tz is None:
+        with pytest.raises(peprock.datetime.EnsureAwareError):
+            peprock.datetime.ensure_aware(
+                arg,
+                assumed_tz=assumed_tz,
+                target_tz=target_tz,
+            )
+    else:
+        expected = arg
+        if arg.tzinfo is None:
+            expected = arg.replace(tzinfo=assumed_tz)
+        if target_tz:
+            expected = expected.astimezone(target_tz)
+        assert (
+            peprock.datetime.ensure_aware(
+                arg,
+                assumed_tz=assumed_tz,
+                target_tz=target_tz,
+            )
+            == expected
+        )

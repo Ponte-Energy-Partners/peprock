@@ -34,7 +34,47 @@ def is_aware(arg: datetime.date | datetime.time | datetime.datetime, /) -> bool:
     return not is_naive(arg)
 
 
+class EnsureAwareError(ValueError):
+    def __init__(
+        self,
+        arg: datetime.datetime,
+        /,
+        *,
+        assumed_tz: datetime.tzinfo | None = None,
+        target_tz: datetime.tzinfo | None = None,
+    ) -> None:
+        super().__init__(
+            f"Unable to ensure awareness of '{arg!r}' using "
+            f"'{assumed_tz=}' and '{target_tz=}'",
+        )
+
+
+def ensure_aware(
+    arg: datetime.datetime,
+    /,
+    *,
+    assumed_tz: datetime.tzinfo | None = None,
+    target_tz: datetime.tzinfo | None = None,
+) -> datetime.datetime:
+    if arg.tzinfo is None:
+        if assumed_tz is None:
+            raise EnsureAwareError(
+                arg,
+                assumed_tz=assumed_tz,
+                target_tz=target_tz,
+            )
+
+        arg = arg.replace(tzinfo=assumed_tz)
+
+    if target_tz:
+        return arg.astimezone(tz=target_tz)
+
+    return arg
+
+
 __all__ = [
     "is_naive",
     "is_aware",
+    "EnsureAwareError",
+    "ensure_aware",
 ]
