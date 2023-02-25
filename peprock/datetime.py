@@ -1,4 +1,4 @@
-# ruff: noqa: TCH003
+from __future__ import annotations
 
 import datetime
 import functools
@@ -46,7 +46,7 @@ def is_aware(arg: datetime.date | datetime.time | datetime.datetime, /) -> bool:
 
 class EnsureAwareError(ValueError):
     def __init__(
-        self,
+        self: EnsureAwareError,
         arg: datetime.datetime,
         /,
         *,
