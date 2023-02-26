@@ -1,3 +1,9 @@
+## 0.3.0 (2023-02-26)
+
+### Refactor
+
+- turn peprock into namespace package
+
 ## 0.2.0 (2023-02-25)
 
 ### Feat
