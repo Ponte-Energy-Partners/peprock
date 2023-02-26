@@ -143,7 +143,7 @@ def test_is_naive_is_aware(arg: typing.Any, is_naive: bool | None) -> None:
         ),
     ],
 )
-def test_ensure_aware_2(arg, assumed_tz, target_tz) -> None:
+def test_ensure_aware(arg, assumed_tz, target_tz) -> None:
     if peprock.datetime.is_naive(arg) and assumed_tz is None:
         with pytest.raises(peprock.datetime.EnsureAwareError):
             peprock.datetime.ensure_aware(
