@@ -4,13 +4,14 @@ changelog_incremental = true
 update_changelog_on_bump = true
 version = "0.2.0"
 version_files = [
-    "peprock/__init__.py",
+    "peprock/_version/__init__.py",
     "pyproject.toml",
 ]
 
 
 [tool.mypy]
 files = "peprock"
+explicit_package_bases = true
 
 python_version = "3.10"
 platform = "linux"

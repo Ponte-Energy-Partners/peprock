@@ -2,7 +2,7 @@ import abc
 
 import pytest
 
-import peprock
+import peprock.subclasses
 
 
 class _A1:
