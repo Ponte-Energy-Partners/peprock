@@ -1,3 +1,9 @@
+## 0.4.1 (2023-02-26)
+
+### Fix
+
+- **models**: add missing py.typed marker
+
 ## 0.4.0 (2023-02-26)
 
 ### Feat
