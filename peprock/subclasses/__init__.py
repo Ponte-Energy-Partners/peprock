@@ -1,6 +1,9 @@
 import inspect
 import typing
 
+# noinspection PyProtectedMember
+from peprock._version import __version__
+
 _T_co = typing.TypeVar("_T_co", covariant=True)
 
 
@@ -51,6 +54,7 @@ def get_by_name(
 
 
 __all__ = [
+    "__version__",
     "get",
     "get_by_name",
 ]
