@@ -1,3 +1,9 @@
+## 0.4.0 (2023-02-26)
+
+### Feat
+
+- **models**: implement `peprock.models.MetricPrefix`
+
 ## 0.3.0 (2023-02-26)
 
 ### Refactor
