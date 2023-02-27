@@ -5,6 +5,8 @@ import functools
 import types
 import typing
 
+_BASE: typing.Final[int] = 10
+
 
 class MetricPrefix(enum.IntEnum):
     # https://en.wikipedia.org/wiki/Metric_prefix
@@ -48,7 +50,7 @@ class MetricPrefix(enum.IntEnum):
 
     @functools.cache  # noqa: B019
     def to(self: MetricPrefix, other: MetricPrefix, /) -> float:
-        return 10 ** (self - other)
+        return _BASE ** (self - other)
 
     def convert(
         self: MetricPrefix,
