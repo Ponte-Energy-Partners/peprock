@@ -9,6 +9,12 @@ version_files = [
 ]
 
 
+[tool.coverage.report]
+exclude_also = [
+    "@typing\\.overload$",
+]
+
+
 [tool.mypy]
 files = "peprock"
 explicit_package_bases = true
@@ -45,9 +51,10 @@ python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
-mypy = "^1.0.0"
-pre-commit = "^3.0.0"
-pytest = "^7.2.0"
+coverage = { version = "^7.2.1", extras = ["toml"] }
+mypy = "^1.0.1"
+pre-commit = "^3.1.0"
+pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
 ruff = "^0.0.252"
 
