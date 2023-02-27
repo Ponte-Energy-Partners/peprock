@@ -48,7 +48,6 @@ class MetricPrefix(enum.IntEnum):
     def __str__(self: MetricPrefix) -> str:
         return self.symbol
 
-    @functools.cache  # noqa: B019
     def to(self: MetricPrefix, other: MetricPrefix, /) -> float:
         return _BASE ** (self - other)
 
