@@ -12,6 +12,7 @@ version_files = [
 [tool.coverage.report]
 exclude_also = [
     "@typing\\.overload$",
+    "^if typing\\.TYPE_CHECKING:$",
 ]
 
 
@@ -125,6 +126,7 @@ select = [
 "tests/*" = [
     "ANN", # flake8-annotations
     "S101", # assert
+    "SLF001", # private-member-access
 ]
 
 [tool.ruff.isort]
