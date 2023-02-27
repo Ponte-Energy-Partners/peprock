@@ -9,6 +9,12 @@ version_files = [
 ]
 
 
+[tool.coverage.report]
+exclude_also = [
+    "@typing\\.overload$",
+]
+
+
 [tool.mypy]
 files = "peprock"
 explicit_package_bases = true
