@@ -1,4 +1,5 @@
 import decimal
+import fractions
 
 import pytest
 
@@ -61,15 +62,27 @@ def test_str(metric_filter):
 
 
 @pytest.mark.parametrize(
+    "number_type",
+    [
+        int,
+        float,
+        complex,
+        decimal.Decimal,
+        fractions.Fraction,
+    ],
+)
+@pytest.mark.parametrize(
     "other",
-    list(peprock.models.MetricPrefix),
+    list(peprock.models.MetricPrefix) + list(range(-6, 6, 2)),
 )
 @pytest.mark.parametrize(
     "metric_filter",
     list(peprock.models.MetricPrefix),
 )
-def test_to(metric_filter, other):
-    assert metric_filter.to(other) == pytest.approx(10 ** (metric_filter - other))
+def test_to(metric_filter, other, number_type):
+    assert metric_filter.to(other, number_type=number_type) == pytest.approx(
+        number_type(peprock.models.metric_prefix._BASE) ** (metric_filter - other),
+    )
 
 
 @pytest.mark.parametrize(
@@ -81,12 +94,14 @@ def test_to(metric_filter, other):
         -2.34,
         0.0,
         53.433,
+        complex(1.23, 4.56),
         decimal.Decimal("-12.4"),
         decimal.Decimal("-8"),
         decimal.Decimal("0"),
         decimal.Decimal("0.0"),
         decimal.Decimal("5.76"),
         decimal.Decimal("35"),
+        fractions.Fraction(12, 7),
     ],
     ids=str,
 )
@@ -108,5 +123,5 @@ def test_to(metric_filter, other):
 )
 def test_convert(metric_filter, to, value):
     assert metric_filter.convert(value, to) == pytest.approx(
-        float(value) * metric_filter.to(to),
+        value * metric_filter.to(to, number_type=type(value)),
     )

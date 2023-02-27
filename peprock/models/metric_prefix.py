@@ -5,6 +5,20 @@ import functools
 import types
 import typing
 
+if typing.TYPE_CHECKING:
+    import decimal
+    import fractions
+
+    _ComplexT = typing.TypeVar(
+        "_ComplexT",
+        float,
+        complex,
+        decimal.Decimal,
+        fractions.Fraction,
+    )
+
+_BASE: typing.Final[int] = 10
+
 
 class MetricPrefix(enum.IntEnum):
     # https://en.wikipedia.org/wiki/Metric_prefix
@@ -46,17 +60,60 @@ class MetricPrefix(enum.IntEnum):
     def __str__(self: MetricPrefix) -> str:
         return self.symbol
 
-    @functools.cache  # noqa: B019
-    def to(self: MetricPrefix, other: MetricPrefix, /) -> float:
-        return 10 ** (self - other)
+    @typing.overload
+    def to(
+        self: MetricPrefix,
+        other: MetricPrefix | int,
+        /,
+        *,
+        number_type: type[int] = int,
+    ) -> int | float:
+        ...
 
+    @typing.overload
+    def to(
+        self: MetricPrefix,
+        other: MetricPrefix | int,
+        /,
+        *,
+        number_type: type[_ComplexT],
+    ) -> _ComplexT:
+        ...
+
+    def to(
+        self: MetricPrefix,
+        other: MetricPrefix | int,
+        /,
+        *,
+        number_type: type[int | _ComplexT] = int,
+    ) -> int | _ComplexT:
+        return number_type(_BASE) ** (self - other)
+
+    @typing.overload
     def convert(
         self: MetricPrefix,
-        value: typing.SupportsFloat,
+        value: int,
         /,
         to: MetricPrefix,
-    ) -> float:
-        return float(value) * self.to(to)
+    ) -> int | float:
+        ...
+
+    @typing.overload
+    def convert(
+        self: MetricPrefix,
+        value: _ComplexT,
+        /,
+        to: MetricPrefix,
+    ) -> _ComplexT:
+        ...
+
+    def convert(
+        self,
+        value,
+        /,
+        to,
+    ):
+        return value * self.to(to, number_type=type(value))
 
     @staticmethod
     @functools.cache
@@ -99,3 +156,8 @@ class MetricPrefix(enum.IntEnum):
         return types.MappingProxyType(
             {symbol: metric_prefix for metric_prefix, symbol in cls._symbols().items()},
         )
+
+
+__all__ = [
+    "MetricPrefix",
+]
