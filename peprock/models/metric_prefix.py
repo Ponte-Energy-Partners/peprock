@@ -101,3 +101,8 @@ class MetricPrefix(enum.IntEnum):
         return types.MappingProxyType(
             {symbol: metric_prefix for metric_prefix, symbol in cls._symbols().items()},
         )
+
+
+__all__ = [
+    "MetricPrefix",
+]
