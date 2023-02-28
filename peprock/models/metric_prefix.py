@@ -9,8 +9,8 @@ if typing.TYPE_CHECKING:
     import decimal
     import fractions
 
-    _ComplexT = typing.TypeVar(
-        "_ComplexT",
+    ComplexT = typing.TypeVar(
+        "ComplexT",
         float,
         complex,
         decimal.Decimal,
@@ -76,8 +76,8 @@ class MetricPrefix(enum.IntEnum):
         other: MetricPrefix | int,
         /,
         *,
-        number_type: type[_ComplexT],
-    ) -> _ComplexT:
+        number_type: type[ComplexT],
+    ) -> ComplexT:
         ...
 
     def to(
@@ -85,8 +85,8 @@ class MetricPrefix(enum.IntEnum):
         other: MetricPrefix | int,
         /,
         *,
-        number_type: type[int | _ComplexT] = int,
-    ) -> int | _ComplexT:
+        number_type: type[int | ComplexT] = int,
+    ) -> int | ComplexT:
         return number_type(_BASE) ** (self - other)
 
     @typing.overload
@@ -101,10 +101,10 @@ class MetricPrefix(enum.IntEnum):
     @typing.overload
     def convert(
         self: MetricPrefix,
-        value: _ComplexT,
+        value: ComplexT,
         /,
         to: MetricPrefix,
-    ) -> _ComplexT:
+    ) -> ComplexT:
         ...
 
     def convert(
