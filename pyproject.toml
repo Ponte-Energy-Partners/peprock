@@ -16,6 +16,9 @@ exclude_also = [
 ]
 
 [tool.coverage.run]
+omit = [
+    "peprock/typing/*",
+]
 source = [
     "peprock",
 ]
