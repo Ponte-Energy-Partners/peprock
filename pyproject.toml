@@ -15,6 +15,14 @@ exclude_also = [
     "^if typing\\.TYPE_CHECKING:$",
 ]
 
+[tool.coverage.run]
+omit = [
+    "peprock/typing/*",
+]
+source = [
+    "peprock",
+]
+
 
 [tool.mypy]
 files = "peprock"
