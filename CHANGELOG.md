@@ -1,3 +1,27 @@
+## 1.0.0 (2023-03-02)
+
+### Feat
+
+- **itertools**: implement `min_and_max()`
+- **typing**: implement `typing` package
+- **models**: improve type handling in `MetricPrefix.to()` and `MetricPrefix.convert()`
+
+### Fix
+
+- **models**: add `__all__` to `metrix_prefix.py`
+
+### Refactor
+
+- **typing**: retire `typing`
+- **itertools**: retire `itertools`
+- **models**: simplify type annotations
+- **subclasses**: leverage `peprock.typing.T_co`
+- **models**: extract base into constant
+
+### Perf
+
+- **models**: remove cache from `MetricPrefix.to()`
+
 ## 0.4.1 (2023-02-26)
 
 ### Fix
