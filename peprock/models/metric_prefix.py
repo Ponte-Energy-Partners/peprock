@@ -1,3 +1,8 @@
+"""Metric prefix model.
+
+See https://en.wikipedia.org/wiki/Metric_prefix
+"""
+
 from __future__ import annotations
 
 import enum
@@ -21,7 +26,7 @@ _BASE: typing.Final[int] = 10
 
 
 class MetricPrefix(enum.IntEnum):
-    # https://en.wikipedia.org/wiki/Metric_prefix
+    """MetricPrefix IntEnum with symbol and conversion support."""
 
     quetta = 30
     ronna = 27
@@ -51,13 +56,16 @@ class MetricPrefix(enum.IntEnum):
 
     @classmethod
     def from_symbol(cls: type[MetricPrefix], symbol: str, /) -> MetricPrefix:
+        """Return MetricPrefix by symbol."""
         return cls._by_symbol()[symbol]
 
     @functools.cached_property
     def symbol(self: MetricPrefix) -> str:
+        """Metric prefix symbol, e.g. G for giga."""
         return self._symbols()[self]
 
     def __str__(self: MetricPrefix) -> str:
+        """Return symbol."""
         return self.symbol
 
     @typing.overload
@@ -87,6 +95,7 @@ class MetricPrefix(enum.IntEnum):
         *,
         number_type: type[int | ComplexT] = int,
     ) -> int | ComplexT:
+        """Calculate conversion factor between self and other."""
         return number_type(_BASE) ** (self - other)
 
     @typing.overload
@@ -113,6 +122,7 @@ class MetricPrefix(enum.IntEnum):
         /,
         to,
     ):
+        """Convert value from metric prefix self to to."""
         return value * self.to(to, number_type=type(value))
 
     @staticmethod

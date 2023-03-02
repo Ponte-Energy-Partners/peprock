@@ -1,3 +1,5 @@
+"""Timedelta constants."""
+
 import datetime
 import typing
 

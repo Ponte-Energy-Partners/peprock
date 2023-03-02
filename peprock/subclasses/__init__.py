@@ -1,3 +1,5 @@
+"""Class hierarchy helpers."""
+
 from __future__ import annotations
 
 import inspect
@@ -16,6 +18,7 @@ def get(
     exclude_abstract: bool = False,
     recursive: bool = False,
 ) -> set[type[T_co]]:
+    """Identify subclasses of base_class and return a set."""
     subclasses: set[type[T_co]] = set()
 
     for subclass in base_class.__subclasses__():
@@ -40,6 +43,7 @@ def get_by_name(
     *,
     recursive: bool = False,
 ) -> type[T_co] | None:
+    """Identify subclass of base_class with given name."""
     for subclass in base_class.__subclasses__():
         if subclass.__name__ == name:
             return subclass
