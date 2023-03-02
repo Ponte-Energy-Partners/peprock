@@ -133,3 +133,6 @@ dmypy.json
 
 # Ruff linter
 .ruff_cache/
+
+# generated documentation
+/_site/
