@@ -7,16 +7,16 @@ import typing
 from peprock._version import __version__
 
 if typing.TYPE_CHECKING:
-    import peprock.typing
+    T_co = typing.TypeVar("T_co", covariant=True)
 
 
 def get(
-    base_class: type[peprock.typing.T_co],
+    base_class: type[T_co],
     *,
     exclude_abstract: bool = False,
     recursive: bool = False,
-) -> set[type[peprock.typing.T_co]]:
-    subclasses: set[type[peprock.typing.T_co]] = set()
+) -> set[type[T_co]]:
+    subclasses: set[type[T_co]] = set()
 
     for subclass in base_class.__subclasses__():
         if recursive:
@@ -35,11 +35,11 @@ def get(
 
 
 def get_by_name(
-    base_class: type[peprock.typing.T_co],
+    base_class: type[T_co],
     name: str,
     *,
     recursive: bool = False,
-) -> type[peprock.typing.T_co] | None:
+) -> type[T_co] | None:
     for subclass in base_class.__subclasses__():
         if subclass.__name__ == name:
             return subclass
