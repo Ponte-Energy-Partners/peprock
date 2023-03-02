@@ -1,3 +1,5 @@
+"""General purpose model classes."""
+
 # noinspection PyProtectedMember
 from peprock._version import __version__
 

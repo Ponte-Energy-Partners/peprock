@@ -1,3 +1,10 @@
+"""Date/time and related helpers and constants.
+
+Complements the datetime package from the standard library
+(https://docs.python.org/3/library/datetime.html), adding timezone awareness helpers and
+timedelta constants.
+"""
+
 # noinspection PyProtectedMember
 from peprock._version import __version__
 
