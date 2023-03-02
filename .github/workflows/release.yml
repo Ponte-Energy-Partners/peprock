@@ -15,6 +15,11 @@ on:
           - "MINOR"
           - "PATCH"
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 # Allow one concurrent deployment
 concurrency:
   group: "pages"
@@ -23,9 +28,6 @@ concurrency:
 jobs:
   release:
     name: Release
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -74,6 +76,5 @@ jobs:
       - name: Upload documentation
         uses: actions/upload-pages-artifact@v1
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v1
       - run: echo "🍏 This job's status is ${{ job.status }}."
