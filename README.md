@@ -13,6 +13,7 @@ Foundational Python library
 
 -   **[peprock.datetime](#datetime)**: Date/time and related helpers and constants.
 -   **[peprock.models](#models)**: General purpose model classes.
+-   **[peprock.patterns](#patterns)**: Reusable software design patterns.
 -   **[peprock.subclasses](#subclasses)**: Class hierarchy helpers.
 
 * * *
@@ -74,6 +75,24 @@ General purpose model classes.
     5000
     >>> MetricPrefix.centi.convert(0.7, to=MetricPrefix.milli)
     7.0
+
+<h3 id="patterns">peprock.patterns</h3>
+
+Reusable software design patterns.
+
+#### Observer
+
+    >>> from peprock.patterns import Subject, Observer
+
+    >>> class MyObserver(Observer):
+    >>>     def notify(self, __subject, message):
+    >>>         print(f"My observer notified by {type(subject).__name__}: {message}")
+
+    >>> observer = MyObserver()
+    >>> subject = Subject()
+    >>> subject.register_observer(observer)
+    >>> subject.notify_observers("Hello, world!")
+    My observer notified by Subject: Hello, world!
 
 <h3 id="subclasses">peprock.subclasses</h3>
 
