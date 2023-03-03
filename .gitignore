@@ -135,4 +135,4 @@ dmypy.json
 .ruff_cache/
 
 # generated documentation
-/_site/
+/html/
