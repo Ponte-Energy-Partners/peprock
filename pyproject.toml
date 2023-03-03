@@ -11,6 +11,7 @@ version_files = [
 
 [tool.coverage.report]
 exclude_also = [
+    "@abc\\.abstractmethod$",
     "@typing\\.overload$",
     "^if typing\\.TYPE_CHECKING:$",
 ]
@@ -137,9 +138,14 @@ ignore = [
 "tests/*" = [
     "ANN", # flake8-annotations
     "D", # pydocstyle
+    "PLR0913", # too-many-arguments
     "S101", # assert
     "SLF001", # private-member-access
+    "T201", # print-found
 ]
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
 
 [tool.ruff.isort]
 combine-as-imports = true
