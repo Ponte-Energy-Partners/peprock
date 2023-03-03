@@ -17,7 +17,17 @@ Foundational Python library
 
 * * *
 
-<h2 id="datetime">peprock.datetime</h2>
+## API documentation
+
+Full API documentation is published to [api.peprock.ponte.energy][].
+
+  [api.peprock.ponte.energy]: https://api.peprock.ponte.energy
+
+* * *
+
+## Overview and examples
+
+<h3 id="datetime">peprock.datetime</h3>
 
 Date/time and related helpers and constants.
 
@@ -26,7 +36,7 @@ timedelta constants.
 
   [datetime package]: https://docs.python.org/3/library/datetime.html
 
-### Timezone awareness helpers
+#### Timezone awareness helpers
 
     >>> from datetime import datetime, timezone
     >>> from peprock.datetime import ensure_aware, is_aware, is_naive
@@ -43,7 +53,7 @@ timedelta constants.
     >>> is_aware(aware)
     True
 
-### Timedelta constants
+#### Timedelta constants
 
     >>> from datetime import datetime
     >>> from peprock.datetime import ONE_SECOND, ONE_HOUR
@@ -52,11 +62,11 @@ timedelta constants.
     >>> dt + ONE_HOUR + 5 * ONE_SECOND
     datetime.datetime(2023, 3, 2, 22, 17, 17)
 
-<h2 id="models">peprock.models</h2>
+<h3 id="models">peprock.models</h3>
 
 General purpose model classes.
 
-### Metric prefix
+#### Metric prefix
 
     >>> from peprock.models import MetricPrefix
 
@@ -65,7 +75,7 @@ General purpose model classes.
     >>> MetricPrefix.centi.convert(0.7, to=MetricPrefix.milli)
     7.0
 
-<h2 id="subclasses">peprock.subclasses</h2>
+<h3 id="subclasses">peprock.subclasses</h3>
 
 Class hierarchy helpers.
 
