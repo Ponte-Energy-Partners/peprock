@@ -44,6 +44,7 @@ authors = [
 ]
 readme = "README.md"
 repository = "https://github.com/Ponte-Energy-Partners/peprock"
+documentation = "https://api.peprock.ponte.energy"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Topic :: Software Development :: Libraries :: Python Modules",
