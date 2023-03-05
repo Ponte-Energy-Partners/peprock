@@ -76,6 +76,15 @@ General purpose model classes.
     >>> MetricPrefix.centi.convert(0.7, to=MetricPrefix.milli)
     7.0
 
+#### Unit
+
+    >>> from peprock.models import Unit
+
+    >>> Unit.ohm.symbol
+    'Ω'
+    >>> Unit("W")
+    <Unit.watt: 'W'>
+
 <h3 id="patterns">peprock.patterns</h3>
 
 Reusable software design patterns.
