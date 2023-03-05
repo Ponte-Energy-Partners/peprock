@@ -71,7 +71,7 @@ class MetricPrefix(enum.IntEnum):
     @typing.overload
     def to(
         self: MetricPrefix,
-        other: MetricPrefix | int,
+        __other: MetricPrefix | int,
         /,
         *,
         number_type: type[int] = int,
@@ -81,7 +81,7 @@ class MetricPrefix(enum.IntEnum):
     @typing.overload
     def to(
         self: MetricPrefix,
-        other: MetricPrefix | int,
+        __other: MetricPrefix | int,
         /,
         *,
         number_type: type[ComplexT],
@@ -90,18 +90,18 @@ class MetricPrefix(enum.IntEnum):
 
     def to(
         self: MetricPrefix,
-        other: MetricPrefix | int,
+        __other: MetricPrefix | int,
         /,
         *,
         number_type: type[int | ComplexT] = int,
     ) -> int | ComplexT:
         """Calculate conversion factor between self and other."""
-        return number_type(_BASE) ** (self - other)
+        return number_type(_BASE) ** (self - __other)
 
     @typing.overload
     def convert(
         self: MetricPrefix,
-        value: int,
+        __value: int,
         /,
         to: MetricPrefix,
     ) -> int | float:
@@ -110,7 +110,7 @@ class MetricPrefix(enum.IntEnum):
     @typing.overload
     def convert(
         self: MetricPrefix,
-        value: ComplexT,
+        __value: ComplexT,
         /,
         to: MetricPrefix,
     ) -> ComplexT:
@@ -118,12 +118,15 @@ class MetricPrefix(enum.IntEnum):
 
     def convert(
         self,
-        value,
+        __value,
         /,
         to,
     ):
         """Convert value from metric prefix self to to."""
-        return value * self.to(to, number_type=type(value))
+        if self is to:
+            return __value
+
+        return __value * self.to(to, number_type=type(__value))
 
     @staticmethod
     @functools.cache
