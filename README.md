@@ -85,6 +85,16 @@ General purpose model classes.
     >>> Unit("W")
     <Unit.watt: 'W'>
 
+#### Measurement
+
+    >>> from decimal import Decimal
+    >>> from peprock.models import Measurement, MetricPrefix, Unit
+
+    >>> Measurement(1.2) + Measurement(4, MetricPrefix.kilo)
+    Measurement(magnitude=4001.2, prefix=<MetricPrefix.NONE: 0>, unit=None)
+    >>> str(abs(2 * Measurement(Decimal("-12.3"), MetricPrefix.mega, Unit.watt)))
+    '24.6 MW'
+
 <h3 id="patterns">peprock.patterns</h3>
 
 Reusable software design patterns.
