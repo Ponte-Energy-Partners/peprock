@@ -60,10 +60,10 @@ python = "^3.10"
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
 coverage = { version = "^7.2.1", extras = ["toml"] }
-mypy = "^1.0.1"
-pre-commit = "^3.1.0"
+mypy = "^1.1.1"
+pre-commit = "^3.1.1"
 pdoc3 = "^0.10.0"
-pytest = "^7.2.1"
+pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
 ruff = "^0.0.254"
 
