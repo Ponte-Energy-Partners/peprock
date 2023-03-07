@@ -1,4 +1,16 @@
-"""Class hierarchy helpers."""
+"""Class hierarchy helpers.
+
+Examples
+--------
+>>> sorted(get(int), key=lambda t: t.__name__)
+[<enum 'IntEnum'>, <enum 'IntFlag'>, <class 'sre_constants._NamedIntConstant'>, <class 'bool'>]
+
+>>> get_by_name(int, name="bool")
+<class 'bool'>
+
+>>> len(get(object))
+280
+"""
 
 from __future__ import annotations
 

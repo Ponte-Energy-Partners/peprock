@@ -1,6 +1,14 @@
 """Metric prefix model.
 
 See https://en.wikipedia.org/wiki/Metric_prefix
+
+Examples
+--------
+>>> MetricPrefix.mega.convert(5, to=MetricPrefix.kilo)
+5000
+
+>>> MetricPrefix.centi.convert(0.7, to=MetricPrefix.milli)
+7.0
 """
 
 from __future__ import annotations
