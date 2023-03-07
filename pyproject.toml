@@ -138,6 +138,7 @@ ignore = [
 "tests/*" = [
     "ANN", # flake8-annotations
     "D", # pydocstyle
+    "PLR0912", # too-many-branches
     "PLR0913", # too-many-arguments
     "S101", # assert
     "SLF001", # private-member-access
