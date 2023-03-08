@@ -38,6 +38,8 @@ jobs:
         run: poetry run mypy
       - name: Run unit tests
         run: poetry run pytest --cov --cov-report=xml
+      - name: Run doctest
+        run: poetry run python -m doctest -v peprock/**/*.py
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
