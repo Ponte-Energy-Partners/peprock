@@ -1,6 +1,14 @@
 """Generic measurement model.
 
 See https://en.wikipedia.org/wiki/Measurement
+
+Examples
+--------
+>>> Measurement(1.2) + Measurement(4, MetricPrefix.kilo)
+Measurement(magnitude=4001.2, prefix=<MetricPrefix.NONE: 0>, unit=None)
+
+>>> str(abs(2 * Measurement(decimal.Decimal("-12.3"), MetricPrefix.mega, Unit.watt)))
+'24.6 MW'
 """
 
 from __future__ import annotations

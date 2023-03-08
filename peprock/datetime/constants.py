@@ -1,4 +1,11 @@
-"""Timedelta constants."""
+"""Timedelta constants.
+
+Examples
+--------
+>>> dt = datetime.datetime(2023, 3, 2, 21, 17, 12)
+>>> dt + ONE_HOUR + 5 * ONE_SECOND
+datetime.datetime(2023, 3, 2, 22, 17, 17)
+"""
 
 import datetime
 import typing

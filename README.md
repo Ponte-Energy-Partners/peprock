@@ -11,119 +11,16 @@ Foundational Python library
 
 **peprock** is a collection of versatile Python libraries, provided as namespace packages:
 
--   **[peprock.datetime](#datetime)**: Date/time and related helpers and constants.
--   **[peprock.models](#models)**: General purpose model classes.
--   **[peprock.patterns](#patterns)**: Reusable software design patterns.
--   **[peprock.subclasses](#subclasses)**: Class hierarchy helpers.
+-   **[peprock.datetime][]**: Date/time and related helpers and constants.
+-   **[peprock.models][]**: General purpose model classes.
+-   **[peprock.patterns][]**: Reusable software design patterns.
+-   **[peprock.subclasses][]**: Class hierarchy helpers.
 
-* * *
-
-## API documentation
+  [peprock.datetime]: https://api.peprock.ponte.energy/datetime/index.html
+  [peprock.models]: https://api.peprock.ponte.energy/models/index.html
+  [peprock.patterns]: https://api.peprock.ponte.energy/patterns/index.html
+  [peprock.subclasses]: https://api.peprock.ponte.energy/subclasses/index.html
 
 Full API documentation is published to [api.peprock.ponte.energy][].
 
   [api.peprock.ponte.energy]: https://api.peprock.ponte.energy
-
-* * *
-
-## Overview and examples
-
-<h3 id="datetime">peprock.datetime</h3>
-
-Date/time and related helpers and constants.
-
-Complements the [datetime package][] from the standard library, adding timezone awareness helpers and
-timedelta constants.
-
-  [datetime package]: https://docs.python.org/3/library/datetime.html
-
-#### Timezone awareness helpers
-
-    >>> from datetime import datetime, timezone
-    >>> from peprock.datetime import ensure_aware, is_aware, is_naive
-    >>> naive = datetime.now()
-
-    >>> is_naive(naive)
-    True
-    >>> is_aware(naive)
-    False
-
-    >>> aware = ensure_aware(naive, assumed_tz=timezone.utc)
-    >>> is_naive(aware)
-    False
-    >>> is_aware(aware)
-    True
-
-#### Timedelta constants
-
-    >>> from datetime import datetime
-    >>> from peprock.datetime import ONE_SECOND, ONE_HOUR
-
-    >>> dt = datetime(2023, 3, 2, 21, 17, 12)
-    >>> dt + ONE_HOUR + 5 * ONE_SECOND
-    datetime.datetime(2023, 3, 2, 22, 17, 17)
-
-<h3 id="models">peprock.models</h3>
-
-General purpose model classes.
-
-#### Metric prefix
-
-    >>> from peprock.models import MetricPrefix
-
-    >>> MetricPrefix.mega.convert(5, to=MetricPrefix.kilo)
-    5000
-    >>> MetricPrefix.centi.convert(0.7, to=MetricPrefix.milli)
-    7.0
-
-#### Unit
-
-    >>> from peprock.models import Unit
-
-    >>> Unit.ohm.symbol
-    'Ω'
-    >>> Unit("W")
-    <Unit.watt: 'W'>
-
-#### Measurement
-
-    >>> from decimal import Decimal
-    >>> from peprock.models import Measurement, MetricPrefix, Unit
-
-    >>> Measurement(1.2) + Measurement(4, MetricPrefix.kilo)
-    Measurement(magnitude=4001.2, prefix=<MetricPrefix.NONE: 0>, unit=None)
-    >>> str(abs(2 * Measurement(Decimal("-12.3"), MetricPrefix.mega, Unit.watt)))
-    '24.6 MW'
-
-<h3 id="patterns">peprock.patterns</h3>
-
-Reusable software design patterns.
-
-#### Observer
-
-    >>> from peprock.patterns import Subject, Observer
-
-    >>> class MyObserver(Observer):
-    >>>     def notify(self, __subject, message):
-    >>>         print(f"My observer notified by {type(subject).__name__}: {message}")
-
-    >>> observer = MyObserver()
-    >>> subject = Subject()
-    >>> subject.register_observer(observer)
-    >>> subject.notify_observers("Hello, world!")
-    My observer notified by Subject: Hello, world!
-
-<h3 id="subclasses">peprock.subclasses</h3>
-
-Class hierarchy helpers.
-
-    >>> from peprock import subclasses
-
-    >>> subclasses.get(int)
-    {<enum 'IntEnum'>, <class 'sre_constants._NamedIntConstant'>, <enum 'IntFlag'>, <class 'bool'>}
-
-    >>> subclasses.get_by_name(int, name="bool")
-    <class 'bool'>
-
-    >>> len(subclasses.get(object))
-    568

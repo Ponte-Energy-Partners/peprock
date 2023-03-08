@@ -2,6 +2,20 @@
 
 See https://docs.python.org/3/library/datetime.html#determining-if-an-object-is-aware-or-naive
 for definitions.
+
+Examples
+--------
+>>> naive = datetime.datetime.now()
+>>> is_naive(naive)
+True
+>>> is_aware(naive)
+False
+
+>>> aware = ensure_aware(naive, assumed_tz=datetime.timezone.utc)
+>>> is_naive(aware)
+False
+>>> is_aware(aware)
+True
 """
 
 from __future__ import annotations

@@ -1,6 +1,18 @@
 """Subject notifies observers of state changes.
 
 See https://en.wikipedia.org/wiki/Observer_pattern
+
+Examples
+--------
+>>> class MyObserver(Observer):
+...     def notify(self, __subject, message):
+...         print(f"My observer notified by {type(subject).__name__}: {message}")
+...
+>>> observer = MyObserver()
+>>> subject = Subject()
+>>> subject.register_observer(observer)
+>>> subject.notify_observers("Hello, world!")
+My observer notified by Subject: Hello, world!
 """
 
 from __future__ import annotations

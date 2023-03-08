@@ -1,6 +1,14 @@
 """Unit of measurement model.
 
 See https://en.wikipedia.org/wiki/Unit_of_measurement
+
+Examples
+--------
+>>> Unit.ohm.symbol
+'Ω'
+
+>>> Unit("W")
+<Unit.watt: 'W'>
 """
 
 from __future__ import annotations
