@@ -1,3 +1,9 @@
+## 1.3.0 (2023-03-09)
+
+### Refactor
+
+- **models**: optimize return type of private `measurement._normalize_magnitudes()`
+
 ## 1.2.1 (2023-03-09)
 
 ## 1.2.0 (2023-03-09)
