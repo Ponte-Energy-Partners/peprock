@@ -78,12 +78,18 @@ class Measurement(
         self: Measurement[_MagnitudeT],
         other: Measurement[_MagnitudeS],
         /,
-    ) -> tuple[MetricPrefix, _MagnitudeT | float, _MagnitudeS | float]:
-        target_prefix: MetricPrefix = min(self.prefix, other.prefix)
+    ) -> tuple[
+        Measurement[_MagnitudeT] | Measurement[_MagnitudeS],
+        _MagnitudeT | float,
+        _MagnitudeS | float,
+    ]:
+        target: Measurement[_MagnitudeT] | Measurement[_MagnitudeS] = (
+            self if self.prefix <= other.prefix else other
+        )
         return (
-            target_prefix,
-            self.prefix.convert(self.magnitude, to=target_prefix),
-            other.prefix.convert(other.magnitude, to=target_prefix),
+            target,
+            self.prefix.convert(self.magnitude, to=target.prefix),
+            other.prefix.convert(other.magnitude, to=target.prefix),
         )
 
     def __lt__(self: Measurement, other: Measurement) -> bool:
@@ -206,13 +212,10 @@ class Measurement(
     def __add__(self: Measurement, other: Measurement) -> Measurement:
         """Return self + other."""
         if isinstance(other, Measurement) and self.unit == other.unit:
-            target_prefix, magnitude_self, magnitude_other = self._normalize_magnitudes(
-                other,
-            )
+            target, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
             return dataclasses.replace(
-                self,
+                target,
                 magnitude=magnitude_self + magnitude_other,
-                prefix=target_prefix,
             )
 
         return NotImplemented
@@ -359,13 +362,10 @@ class Measurement(
     ) -> Measurement:
         """Return self % other."""
         if isinstance(other, Measurement) and self.unit == other.unit:
-            target_prefix, magnitude_self, magnitude_other = self._normalize_magnitudes(
-                other,
-            )
+            target, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
             return dataclasses.replace(
-                self,
+                target,
                 magnitude=magnitude_self % magnitude_other,
-                prefix=target_prefix,
             )
 
         return NotImplemented
@@ -554,13 +554,10 @@ class Measurement(
     def __sub__(self: Measurement, other: Measurement) -> Measurement:
         """Return self - other."""
         if isinstance(other, Measurement) and self.unit == other.unit:
-            target_prefix, magnitude_self, magnitude_other = self._normalize_magnitudes(
-                other,
-            )
+            target, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
             return dataclasses.replace(
-                self,
+                target,
                 magnitude=magnitude_self - magnitude_other,
-                prefix=target_prefix,
             )
 
         return NotImplemented
@@ -675,9 +672,7 @@ class Measurement(
             )
 
         if isinstance(other, Measurement) and self.unit == other.unit:
-            target_prefix, magnitude_self, magnitude_other = self._normalize_magnitudes(
-                other,
-            )
+            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
             return magnitude_self / magnitude_other
 
         return NotImplemented

@@ -141,89 +141,98 @@ def test_str(measurement):
     assert str(measurement) == format(measurement)
 
 
+_target: peprock.models.Measurement
+
+
 @pytest.mark.parametrize(
     ("measurement", "other", "expected"),
     [
         (
-            peprock.models.Measurement(
-                magnitude=12,
+            (
+                _target := peprock.models.Measurement(
+                    magnitude=12,
+                )
             ),
             peprock.models.Measurement(
                 magnitude=34,
             ),
-            (peprock.models.MetricPrefix.NONE, 12, 34),
+            (_target, 12, 34),
         ),
         (
             peprock.models.Measurement(
                 magnitude=12,
             ),
-            peprock.models.Measurement(
-                magnitude=34,
-                prefix=peprock.models.MetricPrefix.milli,
+            (
+                _target := peprock.models.Measurement(
+                    magnitude=34,
+                    prefix=peprock.models.MetricPrefix.milli,
+                )
             ),
-            (peprock.models.MetricPrefix.milli, 12_000, 34),
+            (_target, 12_000, 34),
         ),
         (
-            peprock.models.Measurement(
-                magnitude=12,
+            (
+                _target := peprock.models.Measurement(
+                    magnitude=12,
+                )
             ),
             peprock.models.Measurement(
                 magnitude=34,
                 prefix=peprock.models.MetricPrefix.kilo,
             ),
-            (peprock.models.MetricPrefix.NONE, 12, 34_000),
+            (_target, 12, 34_000),
         ),
         (
             peprock.models.Measurement(
                 magnitude=12,
                 prefix=peprock.models.MetricPrefix.mega,
             ),
-            peprock.models.Measurement(
-                magnitude=34,
-                prefix=peprock.models.MetricPrefix.kilo,
+            (
+                _target := peprock.models.Measurement(
+                    magnitude=34,
+                    prefix=peprock.models.MetricPrefix.kilo,
+                )
             ),
-            (peprock.models.MetricPrefix.kilo, 12_000, 34),
+            (_target, 12_000, 34),
         ),
         (
             peprock.models.Measurement(
                 magnitude=12.3,
                 prefix=peprock.models.MetricPrefix.mega,
             ),
-            peprock.models.Measurement(
-                magnitude=34.5,
-                prefix=peprock.models.MetricPrefix.kilo,
+            (
+                _target := peprock.models.Measurement(
+                    magnitude=34.5,
+                    prefix=peprock.models.MetricPrefix.kilo,
+                )
             ),
-            (peprock.models.MetricPrefix.kilo, 12_300.0, 34.5),
+            (_target, 12_300.0, 34.5),
         ),
         (
             peprock.models.Measurement(
                 magnitude=decimal.Decimal("12.3"),
                 prefix=peprock.models.MetricPrefix.mega,
             ),
-            peprock.models.Measurement(
-                magnitude=decimal.Decimal("34.5"),
-                prefix=peprock.models.MetricPrefix.kilo,
-            ),
             (
-                peprock.models.MetricPrefix.kilo,
-                decimal.Decimal("12300.0"),
-                decimal.Decimal("34.5"),
+                _target := peprock.models.Measurement(
+                    magnitude=decimal.Decimal("34.5"),
+                    prefix=peprock.models.MetricPrefix.kilo,
+                )
             ),
+            (_target, decimal.Decimal("12300.0"), decimal.Decimal("34.5")),
         ),
         (
             peprock.models.Measurement(
                 magnitude=fractions.Fraction("12.3"),
                 prefix=peprock.models.MetricPrefix.mega,
             ),
-            peprock.models.Measurement(
-                magnitude=fractions.Fraction("34.5"),
-                prefix=peprock.models.MetricPrefix.kilo,
-            ),
             (
-                peprock.models.MetricPrefix.kilo,
-                fractions.Fraction("12300"),
-                fractions.Fraction("34.5"),
+                _target := peprock.models.Measurement(
+                    magnitude=fractions.Fraction("34.5"),
+                    prefix=peprock.models.MetricPrefix.kilo,
+                )
             ),
+            (_target, fractions.Fraction("12300"), fractions.Fraction("34.5")),
         ),
     ],
     ids=lambda p: None if isinstance(p, tuple) else str(p),
