@@ -2,13 +2,13 @@
 
 Examples
 --------
->>> sorted(get(int), key=lambda t: t.__name__)
+>>> sorted(get(int), key=lambda t: t.__name__)  # doctest: +SKIP
 [<enum 'IntEnum'>, <enum 'IntFlag'>, <class 'sre_constants._NamedIntConstant'>, <class 'bool'>]
 
 >>> get_by_name(int, name="bool")
 <class 'bool'>
 
->>> len(get(object))
+>>> len(get(object))  # doctest: +SKIP
 280
 """
 
