@@ -19,8 +19,8 @@ import fractions
 import functools
 import typing
 
-from peprock.models.metric_prefix import MetricPrefix
-from peprock.models.unit import Unit
+from .metric_prefix import MetricPrefix
+from .unit import Unit
 
 _MagnitudeT = typing.TypeVar(
     "_MagnitudeT",
