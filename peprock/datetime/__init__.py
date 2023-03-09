@@ -7,13 +7,9 @@ timedelta constants.
 
 # noinspection PyProtectedMember
 from peprock._version import __version__
-from peprock.datetime.awareness import (
-    EnsureAwareError,
-    ensure_aware,
-    is_aware,
-    is_naive,
-)
-from peprock.datetime.constants import (
+
+from .awareness import EnsureAwareError, ensure_aware, is_aware, is_naive
+from .constants import (
     ONE_DAY,
     ONE_HOUR,
     ONE_MICROSECOND,
