@@ -72,8 +72,8 @@ ruff = "^0.0.254"
 
 
 [tool.pytest.ini_options]
+addopts = "--doctest-modules --import-mode=importlib"
 minversion = "7.2"
-testpaths = ["tests"]
 xfail_strict = true
 
 
