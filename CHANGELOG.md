@@ -1,3 +1,15 @@
+## 1.2.0 (2023-03-09)
+
+### Feat
+
+- **models**: implement `Measurement` model
+- **models**: implement `Unit` model
+
+### Refactor
+
+- use absolute imports only
+- **models**: rename position-only arguments and provide fastpath in `MetricPrefix.convert()`
+
 ## 1.1.0 (2023-03-03)
 
 ### Feat
