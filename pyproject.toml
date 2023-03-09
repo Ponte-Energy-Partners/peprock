@@ -2,7 +2,7 @@
 bump_message = "chore: bump version to $new_version"
 changelog_incremental = true
 update_changelog_on_bump = true
-version = "1.2.0"
+version = "1.2.1"
 version_files = [
     "peprock/_version/__init__.py",
     "pyproject.toml",
@@ -37,7 +37,7 @@ warn_unreachable = true
 
 [tool.poetry]
 name = "peprock"
-version = "1.2.0"
+version = "1.2.1"
 description = "Foundational Python library"
 license = "MIT"
 authors = [
