@@ -10,6 +10,9 @@ Measurement(magnitude=4001.2, prefix=<MetricPrefix.NONE: 0>, unit=None)
 
 >>> str(abs(2 * Measurement(decimal.Decimal("-12.3"), MetricPrefix.mega, Unit.watt)))
 '24.6 MW'
+
+>>> int(Measurement(0.123456, MetricPrefix.kilo))
+123
 """
 
 from __future__ import annotations
@@ -670,6 +673,14 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __bool__(self: Self) -> bool:
         """Return True if magnitude is nonzero; otherwise return False."""
         return bool(self.magnitude)
+
+    def __int__(self: Self) -> int:
+        """Return int(self)."""
+        return int(self.prefix.convert(self.magnitude))
+
+    def __float__(self: Self) -> float:
+        """Return float(self)."""
+        return float(self.prefix.convert(self.magnitude))
 
     @typing.overload
     def __round__(
