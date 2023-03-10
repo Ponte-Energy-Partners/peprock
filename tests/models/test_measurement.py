@@ -883,6 +883,16 @@ def test_bool(measurement):
     assert bool(measurement) is bool(measurement.magnitude)
 
 
+def test_int(measurement):
+    assert int(measurement) == int(measurement.prefix.convert(measurement.magnitude))
+
+
+def test_float(measurement):
+    assert float(measurement) == float(
+        measurement.prefix.convert(measurement.magnitude),
+    )
+
+
 @pytest.mark.parametrize(
     "ndigits",
     [
