@@ -1,3 +1,14 @@
+## 1.4.0 (2023-03-10)
+
+### Feat
+
+- **models**: support `Measurement.__int__()` and `Measurement.__float__()`
+
+### Refactor
+
+- **models**: provide default for `to` argument in `MetricPrefix.convert()`
+- **models**: improve type hints
+
 ## 1.3.0 (2023-03-09)
 
 ### Refactor
