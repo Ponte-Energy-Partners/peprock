@@ -111,7 +111,7 @@ class MetricPrefix(enum.IntEnum):
         self: MetricPrefix,
         __value: int,
         /,
-        to: MetricPrefix,
+        to: MetricPrefix = NONE,  # type: ignore[assignment]
     ) -> int | float:
         ...
 
@@ -120,7 +120,7 @@ class MetricPrefix(enum.IntEnum):
         self: MetricPrefix,
         __value: ComplexT,
         /,
-        to: MetricPrefix,
+        to: MetricPrefix = NONE,  # type: ignore[assignment]
     ) -> ComplexT:
         ...
 
@@ -128,7 +128,7 @@ class MetricPrefix(enum.IntEnum):
         self,
         __value,
         /,
-        to,
+        to=NONE,
     ):
         """Convert value from metric prefix self to to."""
         if self is to:

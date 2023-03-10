@@ -149,12 +149,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     @functools.cached_property
     def _hash(self: Self) -> int:
-        return hash(
-            (
-                self.prefix.convert(self.magnitude, to=MetricPrefix.NONE),
-                self.unit,
-            ),
-        )
+        return hash((self.prefix.convert(self.magnitude), self.unit))
 
     def __hash__(self: Self) -> int:
         """Return hash(self)."""

@@ -38,27 +38,27 @@ import peprock.models
     ids=lambda n, *_: n,
 )
 def test_members(name, value, symbol):
-    metric_filter = peprock.models.MetricPrefix[name]
-    assert metric_filter == metric_filter.value == value
-    assert metric_filter.symbol == symbol
+    metric_prefix = peprock.models.MetricPrefix[name]
+    assert metric_prefix == metric_prefix.value == value
+    assert metric_prefix.symbol == symbol
 
 
 @pytest.mark.parametrize(
-    "metric_filter",
+    "metric_prefix",
     list(peprock.models.MetricPrefix),
 )
-def test_from_symbol(metric_filter):
+def test_from_symbol(metric_prefix):
     assert (
-        peprock.models.MetricPrefix.from_symbol(metric_filter.symbol) is metric_filter
+        peprock.models.MetricPrefix.from_symbol(metric_prefix.symbol) is metric_prefix
     )
 
 
 @pytest.mark.parametrize(
-    "metric_filter",
+    "metric_prefix",
     list(peprock.models.MetricPrefix),
 )
-def test_str(metric_filter):
-    assert str(metric_filter) == metric_filter.symbol
+def test_str(metric_prefix):
+    assert str(metric_prefix) == metric_prefix.symbol
 
 
 @pytest.mark.parametrize(
@@ -76,12 +76,12 @@ def test_str(metric_filter):
     list(peprock.models.MetricPrefix) + list(range(-6, 6, 2)),
 )
 @pytest.mark.parametrize(
-    "metric_filter",
+    "metric_prefix",
     list(peprock.models.MetricPrefix),
 )
-def test_to(metric_filter, other, number_type):
-    assert metric_filter.to(other, number_type=number_type) == pytest.approx(
-        number_type(peprock.models.metric_prefix._BASE) ** (metric_filter - other),
+def test_to(metric_prefix, other, number_type):
+    assert metric_prefix.to(other, number_type=number_type) == pytest.approx(
+        number_type(peprock.models.metric_prefix._BASE) ** (metric_prefix - other),
     )
 
 
@@ -108,20 +108,29 @@ def test_to(metric_filter, other, number_type):
 @pytest.mark.parametrize(
     "to",
     [
+        None,
         peprock.models.MetricPrefix.centi,
         peprock.models.MetricPrefix.NONE,
         peprock.models.MetricPrefix.mega,
     ],
 )
 @pytest.mark.parametrize(
-    "metric_filter",
+    "metric_prefix",
     [
         peprock.models.MetricPrefix.centi,
         peprock.models.MetricPrefix.NONE,
         peprock.models.MetricPrefix.mega,
     ],
 )
-def test_convert(metric_filter, to, value):
-    assert metric_filter.convert(value, to) == pytest.approx(
-        value * metric_filter.to(to, number_type=type(value)),
+def test_convert(metric_prefix, to, value):
+    result = (
+        metric_prefix.convert(value) if to is None else metric_prefix.convert(value, to)
+    )
+
+    assert result == pytest.approx(
+        value
+        * metric_prefix.to(
+            to or peprock.models.MetricPrefix.NONE,
+            number_type=type(value),
+        ),
     )
