@@ -21,12 +21,14 @@ import dataclasses
 import decimal
 import fractions
 import functools
+import operator
 import typing
 
 from .metric_prefix import MetricPrefix
 from .unit import Unit
 
 if typing.TYPE_CHECKING:
+    import collections.abc
     import sys
 
     if sys.version_info >= (3, 11):
@@ -35,6 +37,7 @@ if typing.TYPE_CHECKING:
         from typing_extensions import Self
 
 
+_T = typing.TypeVar("_T")
 _MagnitudeT = typing.TypeVar(
     "_MagnitudeT",
     int,
@@ -84,71 +87,126 @@ class Measurement(typing.Generic[_MagnitudeT]):
         """Return str(self)."""
         return self._str
 
-    def _normalize_magnitudes(
+    def replace(self: Self, **changes: typing.Any) -> Self:
+        """Return a new object replacing specified fields with new values."""
+        # noinspection PyDataclass
+        return dataclasses.replace(
+            self,
+            **changes,
+        )
+
+    @typing.overload
+    def _apply_operator(
         self: Self,
-        other: Measurement[_MagnitudeS],
+        __other: Measurement[_MagnitudeS],
+        __operator: collections.abc.Callable[
+            [_MagnitudeT | float, _MagnitudeS | float],
+            _T,
+        ],
         /,
-    ) -> tuple[
-        Self | Measurement[_MagnitudeS],
-        _MagnitudeT | float,
-        _MagnitudeS | float,
-    ]:
-        target: Self | Measurement[_MagnitudeS] = (
-            self if self.prefix <= other.prefix else other
-        )
-        return (
-            target,
-            self.prefix.convert(self.magnitude, to=target.prefix),
-            other.prefix.convert(other.magnitude, to=target.prefix),
-        )
+        *,
+        wrap_in_measurement: typing.Literal[False] = False,
+    ) -> _T:
+        ...
+
+    @typing.overload
+    def _apply_operator(
+        self: Self,
+        __other: object,
+        __operator: collections.abc.Callable[[_MagnitudeT | float, object], _T],
+        /,
+        *,
+        wrap_in_measurement: typing.Literal[False] = False,
+    ) -> _T:
+        ...
+
+    @typing.overload
+    def _apply_operator(
+        self: Self,
+        __other: Measurement[_MagnitudeS],
+        __operator: collections.abc.Callable[
+            [_MagnitudeT | float, _MagnitudeS | float],
+            _T,
+        ],
+        /,
+        *,
+        wrap_in_measurement: typing.Literal[True],
+    ) -> Self:
+        ...
+
+    def _apply_operator(  # noqa: PLR0911
+        self,
+        __other,
+        __operator,
+        /,
+        *,
+        wrap_in_measurement=False,
+    ):
+        if isinstance(__other, Measurement) and self.unit == __other.unit:
+            if self.prefix == __other.prefix:
+                magnitude = __operator(
+                    self.magnitude,
+                    __other.magnitude,
+                )
+
+                if wrap_in_measurement:
+                    return self.replace(
+                        magnitude=magnitude,
+                    )
+
+                return magnitude
+
+            if self.prefix < __other.prefix:
+                magnitude = __operator(
+                    self.magnitude,
+                    __other.prefix.convert(__other.magnitude, to=self.prefix),
+                )
+
+                if wrap_in_measurement:
+                    return self.replace(
+                        magnitude=magnitude,
+                    )
+
+                return magnitude
+
+            magnitude = __operator(
+                self.prefix.convert(self.magnitude, to=__other.prefix),
+                __other.magnitude,
+            )
+
+            if wrap_in_measurement:
+                return self.replace(
+                    magnitude=magnitude,
+                    prefix=__other.prefix,
+                )
+
+            return magnitude
+
+        return NotImplemented
 
     def __lt__(self: Self, other: Measurement) -> bool:
         """Return self < other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self < magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.lt)
 
     def __le__(self: Self, other: Measurement) -> bool:
         """Return self <= other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self <= magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.le)
 
     def __eq__(self: Self, other: object) -> bool:
         """Return self == other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self == magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.eq)
 
     def __ne__(self: Self, other: object) -> bool:
         """Return self != other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self != magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.ne)
 
     def __gt__(self: Self, other: Measurement) -> bool:
         """Return self > other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self > magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.gt)
 
     def __ge__(self: Self, other: Measurement) -> bool:
         """Return self >= other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self >= magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.ge)
 
     @functools.cached_property
     def _hash(self: Self) -> int:
@@ -160,9 +218,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __abs__(self: Self) -> Self:
         """Return abs(self)."""
-        # noinspection PyDataclass
-        return dataclasses.replace(
-            self,
+        return self.replace(
             magnitude=abs(self.magnitude),
         )
 
@@ -217,14 +273,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __add__(self, other):
         """Return self + other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            target, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return dataclasses.replace(
-                target,
-                magnitude=magnitude_self + magnitude_other,
-            )
-
-        return NotImplemented
+        return self._apply_operator(other, operator.add, wrap_in_measurement=True)
 
     @typing.overload
     def __floordiv__(
@@ -299,16 +348,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __floordiv__(self, other):
         """Return self // other."""
         if isinstance(other, int | float | decimal.Decimal | fractions.Fraction):
-            return dataclasses.replace(
-                self,
+            return self.replace(
                 magnitude=self.magnitude // other,
             )
 
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self // magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.floordiv)
 
     @typing.overload
     def __mod__(
@@ -361,14 +405,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __mod__(self, other):
         """Return self % other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            target, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return dataclasses.replace(
-                target,
-                magnitude=magnitude_self % magnitude_other,
-            )
-
-        return NotImplemented
+        return self._apply_operator(other, operator.mod, wrap_in_measurement=True)
 
     @typing.overload
     def __mul__(
@@ -422,8 +459,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __mul__(self, other):
         """Return self * other."""
         if isinstance(other, int | float | decimal.Decimal | fractions.Fraction):
-            return dataclasses.replace(
-                self,
+            return self.replace(
                 magnitude=self.magnitude * other,
             )
 
@@ -484,17 +520,13 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __neg__(self: Self) -> Self:
         """Return -self."""
-        # noinspection PyDataclass
-        return dataclasses.replace(
-            self,
+        return self.replace(
             magnitude=-self.magnitude,
         )
 
     def __pos__(self: Self) -> Self:
         """Return +self."""
-        # noinspection PyDataclass
-        return dataclasses.replace(
-            self,
+        return self.replace(
             magnitude=+self.magnitude,
         )
 
@@ -549,14 +581,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __sub__(self, other):
         """Return self - other."""
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            target, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return dataclasses.replace(
-                target,
-                magnitude=magnitude_self - magnitude_other,
-            )
-
-        return NotImplemented
+        return self._apply_operator(other, operator.sub, wrap_in_measurement=True)
 
     @typing.overload
     def __truediv__(
@@ -659,16 +684,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __truediv__(self, other):
         """Return self / other."""
         if isinstance(other, int | float | decimal.Decimal | fractions.Fraction):
-            return dataclasses.replace(
-                self,
+            return self.replace(
                 magnitude=self.magnitude / other,
             )
 
-        if isinstance(other, Measurement) and self.unit == other.unit:
-            _, magnitude_self, magnitude_other = self._normalize_magnitudes(other)
-            return magnitude_self / magnitude_other
-
-        return NotImplemented
+        return self._apply_operator(other, operator.truediv)
 
     def __bool__(self: Self) -> bool:
         """Return True if magnitude is nonzero; otherwise return False."""
@@ -700,8 +720,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
         __ndigits=None,
     ):
         """Return round(self)."""
-        return dataclasses.replace(
-            self,
+        return self.replace(
             magnitude=round(self.magnitude, __ndigits),
         )
 
