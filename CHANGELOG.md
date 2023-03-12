@@ -1,3 +1,9 @@
+## 1.5.0 (2023-03-12)
+
+### Feat
+
+- **models**: implement `Measurement.replace` and optimize code
+
 ## 1.4.0 (2023-03-10)
 
 ### Feat
