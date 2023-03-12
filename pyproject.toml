@@ -46,8 +46,15 @@ authors = [
 readme = "README.md"
 repository = "https://github.com/Ponte-Energy-Partners/peprock"
 documentation = "https://api.peprock.ponte.energy"
+keywords = [
+    "peprock",
+    "datetime",
+    "models",
+    "patterns",
+    "subclasses",
+]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Intended Audience :: Developers",
     "Natural Language :: English",
