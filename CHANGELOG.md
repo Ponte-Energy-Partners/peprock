@@ -1,3 +1,9 @@
+## 1.6.0 (2023-03-15)
+
+### Perf
+
+- **models**: optimize `Measurement`
+
 ## 1.5.0 (2023-03-12)
 
 ### Feat
