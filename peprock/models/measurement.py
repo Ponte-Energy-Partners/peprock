@@ -70,7 +70,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
             case Unit():
                 return self.unit.symbol
             case _:
-                return str(self.unit)
+                return self.unit
 
     def __format__(self: Self, format_spec: str) -> str:
         """Format measurement and return str."""
@@ -87,12 +87,20 @@ class Measurement(typing.Generic[_MagnitudeT]):
         """Return str(self)."""
         return self._str
 
+    @classmethod
+    @functools.cache
+    def _init_field_names(cls: type[Measurement]) -> tuple[str, ...]:
+        return tuple(field.name for field in dataclasses.fields(cls) if field.init)
+
     def replace(self: Self, **changes: typing.Any) -> Self:
         """Return a new object replacing specified fields with new values."""
-        # noinspection PyDataclass
-        return dataclasses.replace(
-            self,
-            **changes,
+        return type(self)(
+            **{
+                field_name: changes[field_name]
+                if field_name in changes
+                else getattr(self, field_name)
+                for field_name in self._init_field_names()
+            },
         )
 
     @typing.overload
@@ -143,7 +151,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
         wrap_in_measurement=False,
     ):
         if isinstance(__other, Measurement) and self.unit == __other.unit:
-            if self.prefix == __other.prefix:
+            if (diff := self.prefix - __other.prefix) == 0:
                 magnitude = __operator(
                     self.magnitude,
                     __other.magnitude,
@@ -156,7 +164,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
                 return magnitude
 
-            if self.prefix < __other.prefix:
+            if diff < 0:
                 magnitude = __operator(
                     self.magnitude,
                     __other.prefix.convert(__other.magnitude, to=self.prefix),
@@ -347,10 +355,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __floordiv__(self, other):
         """Return self // other."""
-        if isinstance(other, int | float | decimal.Decimal | fractions.Fraction):
-            return self.replace(
-                magnitude=self.magnitude // other,
-            )
+        match other:
+            case int() | float() | decimal.Decimal() | fractions.Fraction():
+                return self.replace(
+                    magnitude=self.magnitude // other,
+                )
 
         return self._apply_operator(other, operator.floordiv)
 
@@ -458,10 +467,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __mul__(self, other):
         """Return self * other."""
-        if isinstance(other, int | float | decimal.Decimal | fractions.Fraction):
-            return self.replace(
-                magnitude=self.magnitude * other,
-            )
+        match other:
+            case int() | float() | decimal.Decimal() | fractions.Fraction():
+                return self.replace(
+                    magnitude=self.magnitude * other,
+                )
 
         return NotImplemented
 
@@ -683,10 +693,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __truediv__(self, other):
         """Return self / other."""
-        if isinstance(other, int | float | decimal.Decimal | fractions.Fraction):
-            return self.replace(
-                magnitude=self.magnitude / other,
-            )
+        match other:
+            case int() | float() | decimal.Decimal() | fractions.Fraction():
+                return self.replace(
+                    magnitude=self.magnitude / other,
+                )
 
         return self._apply_operator(other, operator.truediv)
 
@@ -696,11 +707,19 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __int__(self: Self) -> int:
         """Return int(self)."""
-        return int(self.prefix.convert(self.magnitude))
+        return int(
+            self.magnitude
+            if self.prefix is MetricPrefix.NONE
+            else self.prefix.convert(self.magnitude),
+        )
 
     def __float__(self: Self) -> float:
         """Return float(self)."""
-        return float(self.prefix.convert(self.magnitude))
+        return float(
+            self.magnitude
+            if self.prefix is MetricPrefix.NONE
+            else self.prefix.convert(self.magnitude),
+        )
 
     @typing.overload
     def __round__(

@@ -166,6 +166,7 @@ def test_replace(measurement, changes):
 
 
 def test_lt(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_plus_one_prefix_shift_up,
@@ -176,12 +177,16 @@ def test_lt(
     assert measurement < measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement < measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement < magnitude
 
     assert not measurement_plus_one < measurement
     assert not measurement_plus_one < measurement_plus_one
     assert measurement_plus_one < measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement_plus_one < measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one < magnitude
 
     assert not measurement_plus_one_prefix_shift_up < measurement
     assert not measurement_plus_one_prefix_shift_up < measurement_plus_one
@@ -190,6 +195,8 @@ def test_lt(
     )
     with pytest.raises(TypeError):
         assert measurement_plus_one_prefix_shift_up < measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one_prefix_shift_up < magnitude
 
     with pytest.raises(TypeError):
         assert measurement_other_unit < measurement
@@ -198,9 +205,12 @@ def test_lt(
     with pytest.raises(TypeError):
         assert measurement_other_unit < measurement_plus_one_prefix_shift_up
     assert not measurement_other_unit < measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_other_unit < magnitude
 
 
 def test_le(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_plus_one_prefix_shift_up,
@@ -211,18 +221,24 @@ def test_le(
     assert measurement <= measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement <= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement <= magnitude
 
     assert not measurement_plus_one <= measurement
     assert measurement_plus_one <= measurement_plus_one
     assert measurement_plus_one <= measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement_plus_one <= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one <= magnitude
 
     assert not measurement_plus_one_prefix_shift_up <= measurement
     assert not measurement_plus_one_prefix_shift_up <= measurement_plus_one
     assert measurement_plus_one_prefix_shift_up <= measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement_plus_one_prefix_shift_up <= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one_prefix_shift_up <= magnitude
 
     with pytest.raises(TypeError):
         assert measurement_other_unit <= measurement
@@ -231,9 +247,12 @@ def test_le(
     with pytest.raises(TypeError):
         assert measurement_other_unit <= measurement_plus_one_prefix_shift_up
     assert measurement_other_unit <= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_other_unit <= magnitude
 
 
 def test_eq(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_plus_one_prefix_shift_up,
@@ -243,24 +262,29 @@ def test_eq(
     assert not measurement == measurement_plus_one
     assert not measurement == measurement_plus_one_prefix_shift_up
     assert not measurement == measurement_other_unit
+    assert not measurement == magnitude
 
     assert not measurement_plus_one == measurement
     assert measurement_plus_one == measurement_plus_one
     assert not measurement_plus_one == measurement_plus_one_prefix_shift_up
     assert not measurement_plus_one == measurement_other_unit
+    assert not measurement_plus_one == magnitude
 
     assert not measurement_plus_one_prefix_shift_up == measurement
     assert not measurement_plus_one_prefix_shift_up == measurement_plus_one
     assert measurement_plus_one_prefix_shift_up == measurement_plus_one_prefix_shift_up
     assert not measurement_plus_one_prefix_shift_up == measurement_other_unit
+    assert not measurement_plus_one_prefix_shift_up == magnitude
 
     assert not measurement_other_unit == measurement
     assert not measurement_other_unit == measurement_plus_one
     assert not measurement_other_unit == measurement_plus_one_prefix_shift_up
     assert measurement_other_unit == measurement_other_unit
+    assert not measurement_other_unit == magnitude
 
 
 def test_ne(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_plus_one_prefix_shift_up,
@@ -270,11 +294,13 @@ def test_ne(
     assert measurement != measurement_plus_one
     assert measurement != measurement_plus_one_prefix_shift_up
     assert measurement != measurement_other_unit
+    assert measurement != magnitude
 
     assert measurement_plus_one != measurement
     assert not measurement_plus_one != measurement_plus_one
     assert measurement_plus_one != measurement_plus_one_prefix_shift_up
     assert measurement_plus_one != measurement_other_unit
+    assert measurement_plus_one != magnitude
 
     assert measurement_plus_one_prefix_shift_up != measurement
     assert measurement_plus_one_prefix_shift_up != measurement_plus_one
@@ -282,14 +308,17 @@ def test_ne(
         not measurement_plus_one_prefix_shift_up != measurement_plus_one_prefix_shift_up
     )
     assert measurement_plus_one_prefix_shift_up != measurement_other_unit
+    assert measurement_plus_one_prefix_shift_up != magnitude
 
     assert measurement_other_unit != measurement
     assert measurement_other_unit != measurement_plus_one
     assert measurement_other_unit != measurement_plus_one_prefix_shift_up
     assert not measurement_other_unit != measurement_other_unit
+    assert measurement_other_unit != magnitude
 
 
 def test_gt(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_plus_one_prefix_shift_up,
@@ -300,12 +329,16 @@ def test_gt(
     assert not measurement > measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement > measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement > magnitude
 
     assert measurement_plus_one > measurement
     assert not measurement_plus_one > measurement_plus_one
     assert not measurement_plus_one > measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement_plus_one > measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one > magnitude
 
     assert measurement_plus_one_prefix_shift_up > measurement
     assert measurement_plus_one_prefix_shift_up > measurement_plus_one
@@ -314,6 +347,8 @@ def test_gt(
     )
     with pytest.raises(TypeError):
         assert measurement_plus_one_prefix_shift_up > measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one_prefix_shift_up > magnitude
 
     with pytest.raises(TypeError):
         assert measurement_other_unit > measurement
@@ -322,9 +357,12 @@ def test_gt(
     with pytest.raises(TypeError):
         assert measurement_other_unit > measurement_plus_one_prefix_shift_up
     assert not measurement_other_unit > measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_other_unit > magnitude
 
 
 def test_ge(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_plus_one_prefix_shift_up,
@@ -335,18 +373,24 @@ def test_ge(
     assert not measurement >= measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement >= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement >= magnitude
 
     assert measurement_plus_one >= measurement
     assert measurement_plus_one >= measurement_plus_one
     assert not measurement_plus_one >= measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement_plus_one >= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one >= magnitude
 
     assert measurement_plus_one_prefix_shift_up >= measurement
     assert measurement_plus_one_prefix_shift_up >= measurement_plus_one
     assert measurement_plus_one_prefix_shift_up >= measurement_plus_one_prefix_shift_up
     with pytest.raises(TypeError):
         assert measurement_plus_one_prefix_shift_up >= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_plus_one_prefix_shift_up >= magnitude
 
     with pytest.raises(TypeError):
         assert measurement_other_unit >= measurement
@@ -355,6 +399,8 @@ def test_ge(
     with pytest.raises(TypeError):
         assert measurement_other_unit >= measurement_plus_one_prefix_shift_up
     assert measurement_other_unit >= measurement_other_unit
+    with pytest.raises(TypeError):
+        assert measurement_other_unit >= magnitude
 
 
 def test_hash(
@@ -389,11 +435,18 @@ def test_abs(measurement):
 
 
 def test_add(
+    magnitude,
     measurement,
     measurement_plus_one,
     measurement_prefix_shift,
     measurement_other_unit,
 ):
+    # combine measurement with numeric
+    with pytest.raises(TypeError):
+        measurement + magnitude
+    with pytest.raises(TypeError):
+        magnitude + measurement
+
     # combine measurement with self
     expected = dataclasses.replace(
         measurement,
@@ -430,6 +483,13 @@ def test_floordiv(
     measurement_prefix_shift,
     measurement_other_unit,
 ):
+    # combine measurement with str
+    with pytest.raises(TypeError):
+        measurement // "test"
+    with pytest.raises(TypeError):
+        # noinspection PyUnresolvedReferences
+        "test" // measurement
+
     # combine measurement with integer
     other = 32
     assert measurement // other == dataclasses.replace(
@@ -530,6 +590,12 @@ def test_mod(
     measurement_prefix_shift,
     measurement_other_unit,
 ):
+    # combine measurement with str
+    with pytest.raises(TypeError):
+        measurement % "test"
+    with pytest.raises(TypeError):
+        "test" % measurement
+
     # combine measurement with self
     if measurement.magnitude:
         assert measurement % measurement == dataclasses.replace(
@@ -591,6 +657,12 @@ def test_mod(
 
 
 def test_mul(measurement):
+    # combine measurement with str
+    with pytest.raises(TypeError):
+        measurement * "test"
+    with pytest.raises(TypeError):
+        "test" * measurement
+
     # combine measurement with integer
     other = 32
     expected = dataclasses.replace(
@@ -670,6 +742,13 @@ def test_sub(
     measurement_prefix_shift,
     measurement_other_unit,
 ):
+    # combine measurement with str
+    with pytest.raises(TypeError):
+        measurement - "test"
+    with pytest.raises(TypeError):
+        # noinspection PyUnresolvedReferences
+        "test" - measurement
+
     # combine measurement with self
     assert measurement - measurement == dataclasses.replace(
         measurement,
@@ -709,6 +788,13 @@ def test_truediv(
     measurement_prefix_shift,
     measurement_other_unit,
 ):
+    # combine measurement with str
+    with pytest.raises(TypeError):
+        measurement / "test"
+    with pytest.raises(TypeError):
+        # noinspection PyUnresolvedReferences
+        "test" / measurement
+
     # combine measurement with integer
     other = 32
     assert measurement / other == dataclasses.replace(
