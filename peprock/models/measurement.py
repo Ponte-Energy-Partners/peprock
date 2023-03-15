@@ -75,10 +75,13 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __format__(self: Self, format_spec: str) -> str:
         """Format measurement and return str."""
-        formatted: str = format(self.magnitude, format_spec)
-        if suffix := self.prefix.symbol + self._unit_symbol:
-            return f"{formatted} {suffix}"
-        return formatted
+        if self.prefix.symbol or (self.unit and self.unit is not Unit.one):
+            return (
+                f"{self.magnitude:{format_spec}} "
+                f"{self.prefix.symbol}{self._unit_symbol}"
+            )
+
+        return format(self.magnitude, format_spec)
 
     @functools.cached_property
     def _str(self: Self) -> str:
