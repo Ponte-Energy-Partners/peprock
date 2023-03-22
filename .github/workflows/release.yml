@@ -78,5 +78,5 @@ jobs:
         with:
           path: "html/peprock"
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
       - run: echo "🍏 This job's status is ${{ job.status }}."
