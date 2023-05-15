@@ -16,6 +16,7 @@ False
 False
 >>> is_aware(aware)
 True
+
 """
 
 from __future__ import annotations
