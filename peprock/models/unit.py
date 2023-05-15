@@ -9,6 +9,7 @@ Examples
 
 >>> Unit("W")
 <Unit.watt: 'W'>
+
 """
 
 from __future__ import annotations

@@ -73,7 +73,7 @@ pre-commit = "^3.1.1"
 pdoc3 = "^0.10.0"
 pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
-ruff = "^0.0.262"
+ruff = "^0.0.267"
 
 [tool.poetry.urls]
 "Ponte Energy Partners" = "https://ponte.energy"
@@ -127,6 +127,7 @@ select = [
     "SIM", # flake8-simplify
     "TID", # flake8-tidy-imports
     "TCH", # flake8-type-checking
+    "INT", # flake8-gettext
     "ARG", # flake8-unused-arguments
     "PTH", # flake8-use-pathlib
     "ERA", # eradicate
