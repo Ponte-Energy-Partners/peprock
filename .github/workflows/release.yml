@@ -46,7 +46,7 @@ jobs:
           cache: poetry
       - id: cz
         name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@0.18.1
+        uses: commitizen-tools/commitizen-action@0.18.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           increment: ${{ inputs.increment }}
