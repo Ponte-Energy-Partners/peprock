@@ -73,7 +73,7 @@ pre-commit = "^3.1.1"
 pdoc3 = "^0.10.0"
 pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
-ruff = "^0.0.269"
+ruff = "^0.0.272"
 
 [tool.poetry.urls]
 "Ponte Energy Partners" = "https://ponte.energy"
@@ -133,6 +133,7 @@ select = [
     "ARG", # flake8-unused-arguments
     "PTH", # flake8-use-pathlib
     "TD",  # flake8-todos
+    "FIX",  # flake8-fixme
     "ERA", # eradicate
     "PD", # pandas-vet
     "PGH", # pygrep-hooks
@@ -140,6 +141,7 @@ select = [
     "TRY", # tryceratops
     "FLY",  # flynt
     "NPY", # NumPy-specific rules
+    "AIR", # Airflow
     "RUF", # Ruff-specific rules
 ]
 ignore = [
