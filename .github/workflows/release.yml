@@ -74,7 +74,7 @@ jobs:
       - name: Build documentation
         run: poetry run pdoc --html peprock
       - name: Upload documentation
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: "html/peprock"
       - name: Deploy to GitHub Pages
