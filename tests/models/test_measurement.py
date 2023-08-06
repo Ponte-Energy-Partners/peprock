@@ -3,6 +3,7 @@
 import dataclasses
 import decimal
 import fractions
+import sys
 
 import pytest
 
@@ -128,13 +129,23 @@ def test_unit_symbol(unit):
 )
 def test_format(measurement, format_spec):
     if format_spec and isinstance(measurement.magnitude, fractions.Fraction):
-        with pytest.raises(TypeError):
-            format(measurement, format_spec)
-    else:
-        formatted = format(measurement.magnitude, format_spec)
-        if measurement.prefix.symbol or measurement._unit_symbol:
-            formatted += f" {measurement.prefix.symbol}{measurement._unit_symbol}"
-        assert format(measurement, format_spec) == formatted
+        if sys.version_info < (3, 12):
+            with pytest.raises(TypeError):
+                format(measurement, format_spec)
+            return
+
+        if format_spec == "n":
+            with pytest.raises(
+                ValueError,
+                match="Invalid format specifier 'n' for object of type 'Fraction'",
+            ):
+                format(measurement, format_spec)
+            return
+
+    formatted = format(measurement.magnitude, format_spec)
+    if measurement.prefix.symbol or measurement._unit_symbol:
+        formatted += f" {measurement.prefix.symbol}{measurement._unit_symbol}"
+    assert format(measurement, format_spec) == formatted
 
 
 def test_str(measurement):
