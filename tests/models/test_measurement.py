@@ -1,4 +1,4 @@
-# ruff: noqa: SIM201, SIM202
+# ruff: noqa: PLR0124, SIM201, SIM202
 
 import dataclasses
 import decimal

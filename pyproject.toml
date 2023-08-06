@@ -73,7 +73,7 @@ pre-commit = "^3.1.1"
 pdoc3 = "^0.10.0"
 pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
-ruff = "^0.0.272"
+ruff = "^0.0.282"
 
 [tool.poetry.urls]
 "Ponte Energy Partners" = "https://ponte.energy"
@@ -107,6 +107,7 @@ select = [
     "B", # flake8-bugbear
     "A", # flake8-builtins
     "COM", # flake8-commas
+    "CPY", # flake-copyright
     "C4", # flake8-comprehensions
     "DTZ", # flake8-datetimez
     "T10", # flake8-debugger
@@ -126,6 +127,7 @@ select = [
     "RSE", # flake8-raise
     "RET", # flake8-return
     "SLF", # flake8-self
+    "SLOT", # flake8-slots
     "SIM", # flake8-simplify
     "TID", # flake8-tidy-imports
     "TCH", # flake8-type-checking
@@ -142,6 +144,7 @@ select = [
     "FLY",  # flynt
     "NPY", # NumPy-specific rules
     "AIR", # Airflow
+    "PERF", # Perflint
     "RUF", # Ruff-specific rules
 ]
 ignore = [
