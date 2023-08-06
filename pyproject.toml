@@ -81,6 +81,9 @@ ruff = "^0.0.282"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --import-mode=importlib"
+filterwarnings = [
+    "error",
+]
 minversion = "7.2"
 xfail_strict = true
 
