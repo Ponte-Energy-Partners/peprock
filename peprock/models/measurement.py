@@ -301,7 +301,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
     @typing.overload
     def __floordiv__(
         self: Measurement[float],
-        other: int | float | fractions.Fraction,
+        other: float | fractions.Fraction,
     ) -> Measurement[float]:
         ...
 
@@ -434,7 +434,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
     @typing.overload
     def __mul__(
         self: Measurement[float],
-        other: int | float | fractions.Fraction,
+        other: float | fractions.Fraction,
     ) -> Measurement[float]:
         ...
 
@@ -493,7 +493,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
     @typing.overload
     def __rmul__(
         self: Measurement[float],
-        other: int | float | fractions.Fraction,
+        other: float | fractions.Fraction,
     ) -> Measurement[float]:
         ...
 
@@ -597,7 +597,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
     @typing.overload
     def __truediv__(
         self: Measurement[int] | Measurement[float],
-        other: int | float,
+        other: float,
     ) -> Measurement[float]:
         ...
 
