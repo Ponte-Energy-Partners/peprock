@@ -92,7 +92,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     @classmethod
     @functools.cache
-    def _init_field_names(cls: type[Measurement]) -> tuple[str, ...]:
+    def _init_field_names(cls: type[Self]) -> tuple[str, ...]:
         return tuple(field.name for field in dataclasses.fields(cls) if field.init)
 
     def replace(self: Self, **changes: typing.Any) -> Self:
