@@ -15,6 +15,7 @@ Examples
 from __future__ import annotations
 
 import enum
+import functools
 
 
 class Unit(enum.Enum):
@@ -52,7 +53,7 @@ class Unit(enum.Enum):
     sievert = "Sv"  # equal to one joule per kilogram
     katal = "kat"  # equal to one mole per second
 
-    @property
+    @functools.cached_property
     def symbol(self: Unit) -> str:
         """Get the unit symbol."""
         return self.value
