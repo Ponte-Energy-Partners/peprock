@@ -269,6 +269,7 @@ def test_eq(
     measurement_plus_one_prefix_shift_up,
     measurement_other_unit,
 ):
+    # noinspection DuplicatedCode
     assert measurement == measurement
     assert not measurement == measurement_plus_one
     assert not measurement == measurement_plus_one_prefix_shift_up
@@ -685,6 +686,7 @@ def test_mul(measurement):
 
     # combine measurement with float
     other = 32.1
+    # noinspection DuplicatedCode
     if isinstance(measurement.magnitude, decimal.Decimal):
         with pytest.raises(TypeError):
             measurement * other
@@ -715,6 +717,7 @@ def test_mul(measurement):
 
     # combine measurement with Fraction
     other = fractions.Fraction(32.1)
+    # noinspection DuplicatedCode
     if isinstance(measurement.magnitude, decimal.Decimal):
         with pytest.raises(TypeError):
             measurement * other

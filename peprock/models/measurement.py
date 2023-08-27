@@ -1,4 +1,3 @@
-# noinspection PyTypeChecker
 """Generic measurement model.
 
 See https://en.wikipedia.org/wiki/Measurement
@@ -206,10 +205,12 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     def __eq__(self: Self, other: object) -> bool:
         """Return self == other."""
+        # noinspection PyTypeChecker
         return self._apply_operator(other, operator.eq)
 
     def __ne__(self: Self, other: object) -> bool:
         """Return self != other."""
+        # noinspection PyTypeChecker
         return self._apply_operator(other, operator.ne)
 
     def __gt__(self: Self, other: Measurement) -> bool:
