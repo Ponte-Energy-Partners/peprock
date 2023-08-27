@@ -106,7 +106,8 @@ def test_is_naive_is_aware(arg: typing.Any, is_naive: bool | None) -> None:
             match: str = (
                 "^"
                 + re.escape(
-                    f"expected datetime.date | datetime.time | datetime.datetime, got {arg}",
+                    f"expected datetime.date | datetime.time | datetime.datetime, "
+                    f"got {arg}",
                 )
                 + "$"
             )

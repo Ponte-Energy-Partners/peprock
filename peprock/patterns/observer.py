@@ -52,6 +52,7 @@ class Subject(typing.Generic[_P]):
     ) -> None:
         """Notify registered observers by calling their notify() method."""
         for observer in self._observers:
+            # noinspection PyTypeChecker
             observer.notify(self, *args, **kwargs)
 
 
