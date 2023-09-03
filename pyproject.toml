@@ -148,6 +148,7 @@ select = [
     "NPY", # NumPy-specific rules
     "AIR", # Airflow
     "PERF", # Perflint
+    "FURB", # refurb
     "RUF", # Ruff-specific rules
 ]
 ignore = [
