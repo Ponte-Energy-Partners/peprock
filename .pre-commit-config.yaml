@@ -1,3 +1,6 @@
+default_install_hook_types:
+  - commit-msg
+  - pre-commit
 default_language_version:
   python: python3.11
 repos:
@@ -38,11 +41,11 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.10.0
+    rev: 23.10.1
     hooks:
       - id: black
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.1.1
+    rev: v0.1.3
     hooks:
       - id: ruff
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -57,4 +60,3 @@ repos:
     rev: 3.12.0
     hooks:
       - id: commitizen
-        stages: [ commit-msg ]
