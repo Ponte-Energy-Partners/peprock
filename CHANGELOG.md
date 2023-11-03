@@ -1,3 +1,14 @@
+## 1.6.3 (2023-11-03)
+
+### Refactor
+
+- improve type hint
+
+### Perf
+
+- **models**: optimize `Unit.symbol`
+- **models**: optimize `Measurement.__format__()`
+
 ## 1.6.2 (2023-08-06)
 
 ## 1.6.1 (2023-08-06)
