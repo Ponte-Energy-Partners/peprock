@@ -21,7 +21,7 @@ True
 
 from __future__ import annotations
 
-import datetime  # noqa: TCH003
+import datetime
 import functools
 
 
