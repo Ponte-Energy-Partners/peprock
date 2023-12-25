@@ -1,8 +1,8 @@
-"""Date/time and related helpers and constants.
+"""Date/time and related models, helpers and constants.
 
 Complements the datetime package from the standard library
-(https://docs.python.org/3/library/datetime.html), adding timezone awareness helpers and
-timedelta constants.
+(https://docs.python.org/3/library/datetime.html), adding datetime period models,
+timezone awareness helpers and timedelta constants.
 """
 
 # noinspection PyProtectedMember
@@ -18,6 +18,9 @@ from .constants import (
     ONE_SECOND,
     ONE_WEEK,
 )
+from .period import (
+    Period,
+)
 
 __all__ = [
     "__version__",
@@ -32,4 +35,5 @@ __all__ = [
     "is_aware",
     "EnsureAwareError",
     "ensure_aware",
+    "Period",
 ]
