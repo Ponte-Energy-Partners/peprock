@@ -1,3 +1,9 @@
+## 1.7.0 (2023-12-25)
+
+### Feat
+
+- **datetime**: implement `peprock.datetime.Period`
+
 ## 1.6.3 (2023-11-03)
 
 ### Refactor
