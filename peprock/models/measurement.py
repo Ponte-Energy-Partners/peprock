@@ -99,9 +99,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
         """Return a new object replacing specified fields with new values."""
         return type(self)(
             **{
-                field_name: changes[field_name]
-                if field_name in changes
-                else getattr(self, field_name)
+                field_name: (
+                    changes[field_name]
+                    if field_name in changes
+                    else getattr(self, field_name)
+                )
                 for field_name in self._init_field_names()
             },
         )
@@ -117,8 +119,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
         /,
         *,
         wrap_in_measurement: typing.Literal[False] = False,
-    ) -> _T:
-        ...
+    ) -> _T: ...
 
     @typing.overload
     def _apply_operator(
@@ -128,8 +129,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
         /,
         *,
         wrap_in_measurement: typing.Literal[False] = False,
-    ) -> _T:
-        ...
+    ) -> _T: ...
 
     @typing.overload
     def _apply_operator(
@@ -142,8 +142,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
         /,
         *,
         wrap_in_measurement: typing.Literal[True],
-    ) -> Self:
-        ...
+    ) -> Self: ...
 
     def _apply_operator(  # noqa: PLR0911
         self,
@@ -237,50 +236,43 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __add__(
         self: Measurement[int],
         other: Measurement[int],
-    ) -> Measurement[int] | Measurement[float]:
-        ...
+    ) -> Measurement[int] | Measurement[float]: ...
 
     @typing.overload
     def __add__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: Measurement[float],
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __add__(
         self: Measurement[float],
         other: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __add__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: Measurement[decimal.Decimal],
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __add__(
         self: Measurement[decimal.Decimal],
         other: Measurement[int] | Measurement[decimal.Decimal],
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __add__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: Measurement[fractions.Fraction],
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __add__(
         self: Measurement[fractions.Fraction],
         other: Measurement[int] | Measurement[fractions.Fraction],
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     def __add__(self, other):
         """Return self + other."""
@@ -290,71 +282,61 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __floordiv__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: int | fractions.Fraction,
-    ) -> Measurement[int]:
-        ...
+    ) -> Measurement[int]: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: float,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[float],
         other: float | fractions.Fraction,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[decimal.Decimal],
         other: int | decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: Measurement[int] | Measurement[fractions.Fraction],
-    ) -> int:
-        ...
+    ) -> int: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: Measurement[float],
-    ) -> float:
-        ...
+    ) -> float: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[float],
         other: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
-    ) -> float:
-        ...
+    ) -> float: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: Measurement[decimal.Decimal],
-    ) -> decimal.Decimal:
-        ...
+    ) -> decimal.Decimal: ...
 
     @typing.overload
     def __floordiv__(
         self: Measurement[decimal.Decimal],
         other: Measurement[int] | Measurement[decimal.Decimal],
-    ) -> decimal.Decimal:
-        ...
+    ) -> decimal.Decimal: ...
 
     def __floordiv__(self, other):
         """Return self // other."""
@@ -370,50 +352,43 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __mod__(
         self: Measurement[int],
         other: Measurement[int],
-    ) -> Measurement[int]:
-        ...
+    ) -> Measurement[int]: ...
 
     @typing.overload
     def __mod__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: Measurement[float],
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __mod__(
         self: Measurement[float],
         other: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __mod__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: Measurement[decimal.Decimal],
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __mod__(
         self: Measurement[decimal.Decimal],
         other: Measurement[int] | Measurement[decimal.Decimal],
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __mod__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: Measurement[fractions.Fraction],
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __mod__(
         self: Measurement[fractions.Fraction],
         other: Measurement[int] | Measurement[fractions.Fraction],
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     def __mod__(self, other):
         """Return self % other."""
@@ -423,50 +398,43 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __mul__(
         self: Measurement[int],
         other: int,
-    ) -> Measurement[int]:
-        ...
+    ) -> Measurement[int]: ...
 
     @typing.overload
     def __mul__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: float,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __mul__(
         self: Measurement[float],
         other: float | fractions.Fraction,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __mul__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __mul__(
         self: Measurement[decimal.Decimal],
         other: int | decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __mul__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: fractions.Fraction,
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __mul__(
         self: Measurement[fractions.Fraction],
         other: int | fractions.Fraction,
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     def __mul__(self, other):
         """Return self * other."""
@@ -482,50 +450,43 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __rmul__(
         self: Measurement[int],
         other: int,
-    ) -> Measurement[int]:
-        ...
+    ) -> Measurement[int]: ...
 
     @typing.overload
     def __rmul__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: float,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __rmul__(
         self: Measurement[float],
         other: float | fractions.Fraction,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __rmul__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __rmul__(
         self: Measurement[decimal.Decimal],
         other: int | decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __rmul__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: fractions.Fraction,
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __rmul__(
         self: Measurement[fractions.Fraction],
         other: int | fractions.Fraction,
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     def __rmul__(self, other):
         """Return other * self."""
@@ -547,50 +508,43 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __sub__(
         self: Measurement[int],
         other: Measurement[int],
-    ) -> Measurement[int] | Measurement[float]:
-        ...
+    ) -> Measurement[int] | Measurement[float]: ...
 
     @typing.overload
     def __sub__(
         self: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
         other: Measurement[float],
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __sub__(
         self: Measurement[float],
         other: Measurement[int] | Measurement[float] | Measurement[fractions.Fraction],
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __sub__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: Measurement[decimal.Decimal],
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __sub__(
         self: Measurement[decimal.Decimal],
         other: Measurement[int] | Measurement[decimal.Decimal],
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __sub__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: Measurement[fractions.Fraction],
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __sub__(
         self: Measurement[fractions.Fraction],
         other: Measurement[int] | Measurement[fractions.Fraction],
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     def __sub__(self, other):
         """Return self - other."""
@@ -600,99 +554,85 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __truediv__(
         self: Measurement[int] | Measurement[float],
         other: float,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[float],
         other: fractions.Fraction,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[fractions.Fraction],
         other: float,
-    ) -> Measurement[float]:
-        ...
+    ) -> Measurement[float]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[decimal.Decimal],
         other: int | decimal.Decimal,
-    ) -> Measurement[decimal.Decimal]:
-        ...
+    ) -> Measurement[decimal.Decimal]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: fractions.Fraction,
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[fractions.Fraction],
         other: int | fractions.Fraction,
-    ) -> Measurement[fractions.Fraction]:
-        ...
+    ) -> Measurement[fractions.Fraction]: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[int] | Measurement[float],
         other: Measurement[int] | Measurement[float],
-    ) -> float:
-        ...
+    ) -> float: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[float],
         other: Measurement[fractions.Fraction],
-    ) -> float:
-        ...
+    ) -> float: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[fractions.Fraction],
         other: Measurement[float],
-    ) -> float:
-        ...
+    ) -> float: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[int] | Measurement[decimal.Decimal],
         other: Measurement[decimal.Decimal],
-    ) -> decimal.Decimal:
-        ...
+    ) -> decimal.Decimal: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[decimal.Decimal],
         other: Measurement[int] | Measurement[decimal.Decimal],
-    ) -> decimal.Decimal:
-        ...
+    ) -> decimal.Decimal: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[int] | Measurement[fractions.Fraction],
         other: Measurement[fractions.Fraction],
-    ) -> fractions.Fraction:
-        ...
+    ) -> fractions.Fraction: ...
 
     @typing.overload
     def __truediv__(
         self: Measurement[fractions.Fraction],
         other: Measurement[int] | Measurement[fractions.Fraction],
-    ) -> fractions.Fraction:
-        ...
+    ) -> fractions.Fraction: ...
 
     def __truediv__(self, other):
         """Return self / other."""
@@ -711,31 +651,33 @@ class Measurement(typing.Generic[_MagnitudeT]):
     def __int__(self: Self) -> int:
         """Return int(self)."""
         return int(
-            self.magnitude
-            if self.prefix is MetricPrefix.NONE
-            else self.prefix.convert(self.magnitude),
+            (
+                self.magnitude
+                if self.prefix is MetricPrefix.NONE
+                else self.prefix.convert(self.magnitude)
+            ),
         )
 
     def __float__(self: Self) -> float:
         """Return float(self)."""
         return float(
-            self.magnitude
-            if self.prefix is MetricPrefix.NONE
-            else self.prefix.convert(self.magnitude),
+            (
+                self.magnitude
+                if self.prefix is MetricPrefix.NONE
+                else self.prefix.convert(self.magnitude)
+            ),
         )
 
     @typing.overload
     def __round__(
         self: Self,
-    ) -> Measurement[int]:
-        ...
+    ) -> Measurement[int]: ...
 
     @typing.overload
     def __round__(
         self: Self,
         __ndigits: typing.SupportsIndex,
-    ) -> Self:
-        ...
+    ) -> Self: ...
 
     def __round__(
         self,
