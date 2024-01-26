@@ -84,8 +84,7 @@ class MetricPrefix(enum.IntEnum):
         /,
         *,
         number_type: type[int] = int,
-    ) -> int | float:
-        ...
+    ) -> int | float: ...
 
     @typing.overload
     def to(
@@ -94,8 +93,7 @@ class MetricPrefix(enum.IntEnum):
         /,
         *,
         number_type: type[ComplexT],
-    ) -> ComplexT:
-        ...
+    ) -> ComplexT: ...
 
     def to(
         self: MetricPrefix,
@@ -113,8 +111,7 @@ class MetricPrefix(enum.IntEnum):
         __value: int,
         /,
         to: MetricPrefix = NONE,  # type: ignore[assignment]
-    ) -> int | float:
-        ...
+    ) -> int | float: ...
 
     @typing.overload
     def convert(
@@ -122,8 +119,7 @@ class MetricPrefix(enum.IntEnum):
         __value: ComplexT,
         /,
         to: MetricPrefix = NONE,  # type: ignore[assignment]
-    ) -> ComplexT:
-        ...
+    ) -> ComplexT: ...
 
     def convert(
         self,
