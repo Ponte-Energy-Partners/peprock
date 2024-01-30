@@ -14,6 +14,7 @@ Examples
 >>> subject.notify_observers("Hello, world!")
 My observer notified by Subject: Hello, world!
 
+
 """
 
 from __future__ import annotations
