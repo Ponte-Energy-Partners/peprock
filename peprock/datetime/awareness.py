@@ -99,8 +99,8 @@ def ensure_aware(
 
 
 __all__ = [
-    "is_naive",
-    "is_aware",
     "EnsureAwareError",
     "ensure_aware",
+    "is_aware",
+    "is_naive",
 ]

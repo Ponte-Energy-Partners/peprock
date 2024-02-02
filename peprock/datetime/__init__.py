@@ -23,17 +23,17 @@ from .period import (
 )
 
 __all__ = [
-    "__version__",
+    "ONE_DAY",
+    "ONE_HOUR",
     "ONE_MICROSECOND",
     "ONE_MILLISECOND",
-    "ONE_SECOND",
     "ONE_MINUTE",
-    "ONE_HOUR",
-    "ONE_DAY",
+    "ONE_SECOND",
     "ONE_WEEK",
-    "is_naive",
-    "is_aware",
     "EnsureAwareError",
-    "ensure_aware",
     "Period",
+    "__version__",
+    "ensure_aware",
+    "is_aware",
+    "is_naive",
 ]
