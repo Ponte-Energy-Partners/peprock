@@ -57,7 +57,7 @@ class Subject(typing.Generic[_P]):
             observer.notify(self, *args, **kwargs)
 
 
-class Observer(typing.Generic[_P], metaclass=abc.ABCMeta):
+class Observer(typing.Generic[_P], abc.ABC):
     """Receive notifications from subjects after registration."""
 
     @abc.abstractmethod
@@ -72,6 +72,6 @@ class Observer(typing.Generic[_P], metaclass=abc.ABCMeta):
 
 
 __all__ = [
-    "Subject",
     "Observer",
+    "Subject",
 ]

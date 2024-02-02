@@ -8,8 +8,8 @@ from .metric_prefix import MetricPrefix
 from .unit import Unit
 
 __all__ = [
-    "__version__",
     "Measurement",
     "MetricPrefix",
     "Unit",
+    "__version__",
 ]

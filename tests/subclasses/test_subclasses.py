@@ -9,7 +9,7 @@ class _A1:
     pass
 
 
-class _A2(metaclass=abc.ABCMeta):
+class _A2(abc.ABC):
     @abc.abstractmethod
     def method(self) -> None:
         raise NotImplementedError
@@ -19,13 +19,13 @@ class _B1(_A1):
     pass
 
 
-class _B2(_A1, metaclass=abc.ABCMeta):
+class _B2(_A1, abc.ABC):
     @abc.abstractmethod
     def method(self) -> None:
         raise NotImplementedError
 
 
-class _B3(_A1, _A2, metaclass=abc.ABCMeta):
+class _B3(_A1, _A2, abc.ABC):
     pass
 
 
@@ -34,7 +34,7 @@ class _B4(_A1, _A2):
         return None
 
 
-class _B5(_A2, metaclass=abc.ABCMeta):
+class _B5(_A2, abc.ABC):
     pass
 
 
@@ -47,7 +47,7 @@ class _C1(_B1):
     pass
 
 
-class _C2(_B1, metaclass=abc.ABCMeta):
+class _C2(_B1, abc.ABC):
     @abc.abstractmethod
     def method(self) -> None:
         raise NotImplementedError
