@@ -12,7 +12,7 @@ Examples
 280
 
 
-"""
+"""  # noqa: E501
 
 from __future__ import annotations
 
