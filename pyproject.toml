@@ -73,7 +73,7 @@ pre-commit = "^3.1.1"
 pdoc3 = "^0.10.0"
 pytest = "^8.0.0"
 pytest-cov = "^4.0.0"
-ruff = "^0.2.0"
+ruff = ">=0.2,<0.4"
 
 [tool.poetry.urls]
 "Ponte Energy Partners" = "https://ponte.energy"
