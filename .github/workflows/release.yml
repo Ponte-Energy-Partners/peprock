@@ -53,7 +53,7 @@ jobs:
       - name: Build package
         run: poetry build
       - name: Release to GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: dist/*
           tag_name: ${{ steps.cz.outputs.version }}
