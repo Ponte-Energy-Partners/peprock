@@ -1,3 +1,8 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
 [tool.commitizen]
 bump_message = "chore: bump version to $new_version"
 changelog_incremental = true
@@ -66,7 +71,6 @@ python = "^3.10"
 typing-extensions = { version = "^4.0.1", python = "<3.11" }
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.1.0"
 coverage = { version = "^7.2.1", extras = ["toml"] }
 mypy = "^1.1.1"
 pre-commit = "^3.1.1"
@@ -180,8 +184,3 @@ force-wrap-aliases = true
 known-first-party = [
     "peprock",
 ]
-
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
