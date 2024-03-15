@@ -38,23 +38,20 @@ repos:
       - id: pretty-format-json
       - id: requirements-txt-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 24.2.0
-    hooks:
-      - id: black
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.3.0
+    rev: v0.3.3
     hooks:
+      - id: ruff-format
       - id: ruff
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
+    rev: v1.9.0
     hooks:
       - id: mypy
   - repo: https://github.com/python-poetry/poetry
-    rev: 1.8.1
+    rev: 1.8.2
     hooks:
       - id: poetry-check
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.16.0
+    rev: v3.18.4
     hooks:
       - id: commitizen
