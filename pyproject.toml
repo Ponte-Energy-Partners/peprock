@@ -4,14 +4,10 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.commitizen]
+version_provider = "poetry"
+update_changelog_on_bump = true
 bump_message = "chore: bump version to $new_version"
 changelog_incremental = true
-update_changelog_on_bump = true
-version = "1.7.0"
-version_files = [
-    "peprock/_version/__init__.py",
-    "pyproject.toml",
-]
 
 
 [tool.coverage.report]
