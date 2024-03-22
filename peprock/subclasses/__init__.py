@@ -16,14 +16,14 @@ Examples
 
 from __future__ import annotations
 
+import importlib.metadata
 import inspect
 import typing
 
-# noinspection PyProtectedMember
-from peprock._version import __version__
-
 if typing.TYPE_CHECKING:
     T_co = typing.TypeVar("T_co", covariant=True)
+
+__version__ = importlib.metadata.version("peprock")
 
 
 def get(

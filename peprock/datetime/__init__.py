@@ -5,8 +5,7 @@ Complements the datetime package from the standard library
 timezone awareness helpers and timedelta constants.
 """
 
-# noinspection PyProtectedMember
-from peprock._version import __version__
+import importlib.metadata
 
 from .awareness import EnsureAwareError, ensure_aware, is_aware, is_naive
 from .constants import (
@@ -21,6 +20,8 @@ from .constants import (
 from .period import (
     Period,
 )
+
+__version__ = importlib.metadata.version("peprock")
 
 __all__ = [
     "ONE_DAY",
