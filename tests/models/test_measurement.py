@@ -606,7 +606,7 @@ def test_mod(
     with pytest.raises(TypeError):
         measurement % "test"
     with pytest.raises(TypeError):
-        "test" % measurement
+        "test" % measurement  # noqa: UP031
 
     # combine measurement with self
     if measurement.magnitude:
