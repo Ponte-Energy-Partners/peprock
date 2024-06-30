@@ -70,10 +70,10 @@ typing-extensions = { version = "^4.0.1", python = "<3.11" }
 coverage = { version = "^7.2.1", extras = ["toml"] }
 mypy = "^1.1.1"
 pre-commit = "^3.1.1"
-pdoc3 = "^0.10.0"
+pdoc3 = "^0.11.1"
 pytest = "^8.0.0"
 pytest-cov = "^5.0.0"
-ruff = "^0.4.4"
+ruff = "^0.5.0"
 
 [tool.poetry.urls]
 "Ponte Energy Partners" = "https://ponte.energy"
@@ -89,71 +89,11 @@ xfail_strict = true
 
 
 [tool.ruff]
+required-version = ">=0.5.0"
 target-version = "py310"
 
 [tool.ruff.lint]
-# https://docs.astral.sh/ruff/rules/
-select = [
-    "F", # Pyflakes
-    "W", # pycodestyle
-    "E", # pycodestyle
-    "C90", # mccabe
-    "I", # isort
-    "N", # pep8-naming
-    "D", # pydocstyle
-    "UP", # pyupgrade
-    "YTT", # flake8-2020
-    "ANN", # flake8-annotations
-    "ASYNC", # flake8-async
-    "TRIO", # flake8-trio
-    "S", # flake8-bandit
-    "BLE", # flake8-blind-except
-    "FBT", # flake8-boolean-trap
-    "B", # flake8-bugbear
-    "A", # flake8-builtins
-    "COM", # flake8-commas
-    "CPY", # flake-copyright
-    "C4", # flake8-comprehensions
-    "DTZ", # flake8-datetimez
-    "T10", # flake8-debugger
-    "DJ", # flake8-django
-    "EM", # flake8-errmsg
-    "EXE", # flake8-executable
-    "FA", # flake8-future-annotations
-    "ISC", # flake8-implicit-str-concat
-    "ICN", # flake8-import-conventions
-    "G", # flake8-logging-format
-    "INP", # flake8-no-pep420
-    "PIE", # flake8-pie
-    "T20", # flake8-print
-    "PYI", # flake8-pyi
-    "PT", # flake8-pytest-style
-    "Q", # flake8-quotes
-    "RSE", # flake8-raise
-    "RET", # flake8-return
-    "SLF", # flake8-self
-    "SLOT", # flake8-slots
-    "SIM", # flake8-simplify
-    "TID", # flake8-tidy-imports
-    "TCH", # flake8-type-checking
-    "INT", # flake8-gettext
-    "ARG", # flake8-unused-arguments
-    "PTH", # flake8-use-pathlib
-    "TD", # flake8-todos
-    "FIX", # flake8-fixme
-    "ERA", # eradicate
-    "PD", # pandas-vet
-    "PGH", # pygrep-hooks
-    "PL", # Pylint
-    "TRY", # tryceratops
-    "FLY", # flynt
-    "NPY", # NumPy-specific rules
-    "AIR", # Airflow
-    "PERF", # Perflint
-    "FURB", # refurb
-    "LOG", # flake8-logging
-    "RUF", # Ruff-specific rules
-]
+select = ["ALL"]
 ignore = [
     "D203", # one-blank-line-before-class
     "D213", # multi-line-summary-second-line
