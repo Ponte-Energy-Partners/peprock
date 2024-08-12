@@ -13,7 +13,6 @@ changelog_incremental = true
 [tool.coverage.report]
 exclude_also = [
     "@abc\\.abstractmethod$",
-    "@typing\\.overload$",
     "^if typing\\.TYPE_CHECKING:$",
 ]
 
