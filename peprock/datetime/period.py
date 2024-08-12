@@ -45,7 +45,7 @@ else:
 
 @dataclasses.dataclass(frozen=True)
 class Period(
-    collections.abc.Container,
+    collections.abc.Container["Period | datetime.datetime"],
 ):
     """Datetime period supporting arithmetic operations."""
 
