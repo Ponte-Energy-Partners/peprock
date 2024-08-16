@@ -55,7 +55,7 @@ def subject_type(subject_and_observer_type):
     return subject_and_observer_type[0]
 
 
-@pytest.fixture()
+@pytest.fixture
 def subject(subject_type):
     return subject_type()
 
@@ -65,7 +65,7 @@ def observer_type(subject_and_observer_type):
     return subject_and_observer_type[1]
 
 
-@pytest.fixture()
+@pytest.fixture
 def observer(observer_type):
     return observer_type()
 

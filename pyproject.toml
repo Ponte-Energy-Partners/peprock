@@ -72,7 +72,7 @@ pre-commit = "^3.1.1"
 pdoc3 = "^0.11.1"
 pytest = "^8.0.0"
 pytest-cov = "^5.0.0"
-ruff = "^0.5.0"
+ruff = "^0.6.0"
 
 [tool.poetry.urls]
 "Ponte Energy Partners" = "https://ponte.energy"
@@ -88,7 +88,7 @@ xfail_strict = true
 
 
 [tool.ruff]
-required-version = ">=0.5.0"
+required-version = ">=0.6.0"
 target-version = "py310"
 
 [tool.ruff.lint]
@@ -116,6 +116,3 @@ allow-star-arg-any = true
 [tool.ruff.lint.isort]
 combine-as-imports = true
 force-wrap-aliases = true
-known-first-party = [
-    "peprock",
-]
