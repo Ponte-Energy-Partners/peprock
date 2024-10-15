@@ -1,3 +1,10 @@
+## 1.7.1 (2024-10-15)
+
+### Refactor
+
+- simplify version sourcing
+- apply ruff preview recommendations
+
 ## 1.7.0 (2023-12-25)
 
 ### Feat
