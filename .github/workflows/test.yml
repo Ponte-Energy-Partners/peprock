@@ -15,29 +15,31 @@ jobs:
         python-version: [ "3.10", "3.11", "3.12", "3.13" ]
     env:
       PYTHON: ${{ matrix.python-version }}
+      UV_PYTHON_PREFERENCE: only-system
+      UV_LOCKED: 1
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Set up Poetry
-        run: pipx install poetry
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          version: "0.4.27"
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: poetry
-      - name: Install dependencies
-        run: poetry install
       - name: Check code formatting
-        run: poetry run ruff format --check
+        run: uv run ruff format --check
       - name: Run linter
-        run: poetry run ruff check
+        run: uv run ruff check
       - name: Run type checker
-        run: poetry run mypy
+        run: uv run mypy
       - name: Run unit tests
-        run: poetry run pytest --cov --cov-report=xml
+        run: uv run pytest --cov --cov-report=xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
