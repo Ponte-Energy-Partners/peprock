@@ -46,6 +46,7 @@ repos:
     rev: v1.13.0
     hooks:
       - id: mypy
+        additional_dependencies: [orjson]
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.30.0
     hooks:
