@@ -52,9 +52,17 @@ jobs:
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@0.21.0
         with:
+          push: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
           increment: ${{ inputs.increment }}
           check_consistency: true
+      - name: Amend commit with updated uv.lock
+        run: |
+          UV_LOCKED=0 uv lock
+          git add uv.lock
+          git commit --amend --no-edit
+          git tag ${{ steps.cz.outputs.version }} --force
+          git push --tags
       - name: Build package
         run: uv build
       - name: Release to GitHub
