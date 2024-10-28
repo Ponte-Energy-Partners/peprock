@@ -330,7 +330,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/40/a3/141d32ae6abfdd17f
 
 [[package]]
 name = "peprock"
-version = "1.7.2"
+version = "1.7.3"
 source = { editable = "." }
 dependencies = [
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
