@@ -62,7 +62,7 @@ version_provider = "pep621"
 update_changelog_on_bump = true
 bump_message = "chore: bump version to $new_version"
 pre_bump_hooks = [
-  "~/.local/bin/uv lock && git add uv.lock",
+  "$(which uv) lock && git add uv.lock",
 ]
 changelog_incremental = true
 
