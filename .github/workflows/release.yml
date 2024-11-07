@@ -50,7 +50,7 @@ jobs:
           python-version-file: "pyproject.toml"
       - id: cz
         name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@0.21.0
+        uses: commitizen-tools/commitizen-action@0.22.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           extra_requirements: "uv==${{ steps.uv.outputs.uv-version }}"
