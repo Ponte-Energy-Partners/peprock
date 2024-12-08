@@ -45,4 +45,5 @@ jobs:
         with:
           env_vars: PYTHON
           files: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
