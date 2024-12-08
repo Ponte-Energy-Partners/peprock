@@ -670,23 +670,15 @@ class Measurement(typing.Generic[_MagnitudeT]):
         )
 
     @typing.overload
-    def __round__(
-        self: Self,
-    ) -> Measurement[int]: ...
+    def __round__(self: Self) -> Measurement[int]: ...
 
     @typing.overload
-    def __round__(
-        self: Self,
-        __ndigits: typing.SupportsIndex,
-    ) -> Self: ...
+    def __round__(self: Self, ndigits: int, /) -> Self: ...
 
-    def __round__(
-        self,
-        __ndigits=None,
-    ):
+    def __round__(self, ndigits=None, /):
         """Return round(self)."""
         return self.replace(
-            magnitude=round(self.magnitude, __ndigits),
+            magnitude=round(self.magnitude, ndigits),
         )
 
 
