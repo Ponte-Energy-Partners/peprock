@@ -8,7 +8,7 @@ only-include = ["peprock"]
 
 [project]
 name = "peprock"
-version = "1.7.4"
+version = "1.7.5"
 description = "Foundational Python library"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
