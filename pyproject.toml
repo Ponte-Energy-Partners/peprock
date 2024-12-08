@@ -52,8 +52,8 @@ dev = [
 ]
 
 [project.urls]
-source = "https://github.com/Ponte-Energy-Partners/peprock"
-documentation = "https://api.peprock.ponte.energy"
+"Source Code" = "https://github.com/Ponte-Energy-Partners/peprock"
+Documentation = "https://api.peprock.ponte.energy"
 "Ponte Energy Partners" = "https://ponte.energy"
 
 
