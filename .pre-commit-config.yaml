@@ -38,7 +38,7 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.7.1
+    rev: v0.8.2
     hooks:
       - id: ruff-format
       - id: ruff
@@ -48,6 +48,6 @@ repos:
       - id: mypy
         additional_dependencies: [orjson]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.30.0
+    rev: v4.1.0
     hooks:
       - id: commitizen
