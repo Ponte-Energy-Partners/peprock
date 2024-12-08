@@ -1,3 +1,10 @@
+## 1.7.4 (2024-12-08)
+
+### Fix
+
+- **patterns**: apply PEP 570 to `Observer.notify()`
+- **models**: apply PEP 570 to `Measurement.__round__()`
+
 ## 1.7.3 (2024-10-28)
 
 ## 1.7.2 (2024-10-27)

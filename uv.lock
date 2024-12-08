@@ -344,7 +344,7 @@ wheels = [
 
 [[package]]
 name = "peprock"
-version = "1.7.3"
+version = "1.7.4"
 source = { editable = "." }
 dependencies = [
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
