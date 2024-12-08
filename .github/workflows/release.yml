@@ -69,6 +69,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+          attestations: false
       - name: Publish peprock 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
       - name: Setup Pages
