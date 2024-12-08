@@ -64,6 +64,7 @@ class Observer(typing.Generic[_P], abc.ABC):
     def notify(
         self: Observer[_P],
         __subject: Subject[_P],
+        /,
         *args: _P.args,
         **kwargs: _P.kwargs,
     ) -> None:
