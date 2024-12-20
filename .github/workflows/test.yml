@@ -15,8 +15,7 @@ jobs:
         python-version: [ "3.10", "3.11", "3.12", "3.13" ]
     env:
       PYTHON: ${{ matrix.python-version }}
-      UV_PYTHON_PREFERENCE: only-system
-      UV_LOCKED: 1
+      UV_FROZEN: 1
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -24,12 +23,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          enable-cache: true
-          version: "0.5.7"
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Check code formatting
