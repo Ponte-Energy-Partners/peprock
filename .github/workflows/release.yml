@@ -29,7 +29,7 @@ jobs:
       pages: write
       id-token: write
     env:
-      UV_PYTHON_PREFERENCE: only-system
+      UV_FROZEN: 1
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -40,14 +40,7 @@ jobs:
           fetch-depth: 0
       - id: uv
         name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          enable-cache: true
-          version: "0.5.7"
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: "pyproject.toml"
+        uses: astral-sh/setup-uv@v5
       - id: cz
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@0.23.0
