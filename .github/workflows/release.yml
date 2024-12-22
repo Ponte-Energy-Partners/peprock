@@ -28,8 +28,6 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    env:
-      UV_FROZEN: 1
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
