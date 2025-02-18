@@ -43,12 +43,12 @@ dependencies = [
 [dependency-groups]
 dev = [
     "coverage[toml] >=7.2.1,<8.0.0",
-    "mypy[faster-cache] >=1.1.1,<2.0.0",
+    "mypy[faster-cache] >=1.15.0,<2.0.0",
     "pre-commit >=4.0.1,<5.0.0",
     "pdoc3 >=0.11.1,<0.12.0",
     "pytest >=8.0.0,<9.0.0",
     "pytest-cov >=6.0.0,<7.0.0",
-    "ruff >=0.9.0,<0.10.0",
+    "ruff >=0.9.6,<0.10.0",
 ]
 
 [project.urls]
@@ -97,12 +97,12 @@ addopts = "--doctest-modules --import-mode=importlib"
 filterwarnings = [
     "error",
 ]
-minversion = "7.2"
+minversion = "8.0"
 xfail_strict = true
 
 
 [tool.ruff]
-required-version = ">=0.6.0"
+required-version = ">=0.9.6"
 target-version = "py310"
 
 [tool.ruff.lint]
@@ -130,3 +130,7 @@ allow-star-arg-any = true
 [tool.ruff.lint.isort]
 combine-as-imports = true
 force-wrap-aliases = true
+
+
+[tool.uv]
+required-version = ">=0.6.1"

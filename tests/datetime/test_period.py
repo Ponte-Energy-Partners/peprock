@@ -140,7 +140,7 @@ class TestGenericPeriod:
 
         match expected:
             case (duration, midpoint):
-                assert period.duration == duration  # type: ignore[unreachable]
+                assert period.duration == duration
                 assert period.midpoint == midpoint
             case _:
                 with pytest.raises(expected):
