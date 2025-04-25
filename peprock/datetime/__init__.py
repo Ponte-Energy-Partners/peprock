@@ -1,4 +1,3 @@
-# noqa: A005
 """Date/time and related models, helpers and constants.
 
 Complements the datetime package from the standard library

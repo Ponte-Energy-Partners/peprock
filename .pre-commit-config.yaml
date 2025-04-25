@@ -38,11 +38,11 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.6.1
+    rev: 0.6.16
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.6
+    rev: v0.11.7
     hooks:
       - id: ruff-format
       - id: ruff
@@ -52,6 +52,6 @@ repos:
       - id: mypy
         additional_dependencies: [orjson]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.2.1
+    rev: v4.6.0
     hooks:
       - id: commitizen
