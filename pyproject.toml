@@ -133,4 +133,4 @@ force-wrap-aliases = true
 
 
 [tool.uv]
-required-version = ">=0.6.16"
+required-version = ">=0.7.0"
