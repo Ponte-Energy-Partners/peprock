@@ -30,24 +30,31 @@ jobs:
       id-token: write
     env:
       UV_PYTHON_PREFERENCE: only-system
+    timeout-minutes: 5
+
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: echo "🔎 The name of your branch is ${GITHUB_REF} and your repository is ${{ github.repository }}."
+        env:
+          GITHUB_REF: ${{ github.ref }}
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           fetch-depth: 0
       - id: uv
         name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb  # v6.1.0
+        with:
+          enable-cache: false
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version-file: "pyproject.toml"
       - id: cz
         name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@0.24.0
+        uses: commitizen-tools/commitizen-action@5b0848cd060263e24602d1eba03710e056ef7711  # 0.24.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           extra_requirements: "uv==${{ steps.uv.outputs.uv-version }}"
@@ -56,19 +63,19 @@ jobs:
       - name: Build package
         run: uv build
       - name: Release to GitHub
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631  # v2.2.2
         with:
           files: dist/*
           tag_name: ${{ steps.cz.outputs.version }}
           fail_on_unmatched_files: true
           generate_release_notes: true
       - name: Publish peprock 📦 to Test PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc  # v1.12.4
         with:
           repository-url: https://test.pypi.org/legacy/
           attestations: false
       - name: Publish peprock 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc  # v1.12.4
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build documentation
@@ -79,4 +86,6 @@ jobs:
           path: "html/peprock"
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🍏 This job's status is ${JOB_STATUS}."
+        env:
+          JOB_STATUS: ${{ job.status }}

@@ -15,20 +15,33 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ "ubuntu-24.04", "ubuntu-24.04-arm" ]
-        python-version: [ "3.10", "3.11", "3.12", "3.13" ]
+        os:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+        python-version:
+          - >-
+            3.10
+          - 3.11
+          - 3.12
+          - 3.13
     env:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
       UV_FROZEN: 1
+    timeout-minutes: 5
+
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: echo "🔎 The name of your branch is ${GITHUB_REF} and your repository is ${{ github.repository }}."
+        env:
+          GITHUB_REF: ${{ github.ref }}
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb  # v6.1.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Check code formatting
@@ -40,15 +53,25 @@ jobs:
       - name: Run unit tests
         run: uv run pytest --cov --cov-report=xml --junitxml=junit.xml -o junit_family=legacy
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24  # v5.4.3
         with:
-          env_vars: PYTHON
+          env_vars: OS,PYTHON
           files: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+        uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f  # v1.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           env_vars: OS,PYTHON
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🍏 This job's status is ${JOB_STATUS}."
+        env:
+          JOB_STATUS: ${{ job.status }}
+
+  zizmor:
+    name: 🌈 zizmor
+    permissions:
+      security-events: write
+
+    # yamllint disable-line rule:line-length
+    uses: zizmorcore/workflow/.github/workflows/reusable-zizmor.yml@3bb5e95068d0f44b6d2f3f7e91379bed1d2f96a8
