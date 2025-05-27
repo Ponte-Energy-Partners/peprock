@@ -6,7 +6,7 @@ repos:
     rev: v5.0.0
     hooks:
       - id: check-added-large-files
-        args: [ --enforce-all ]
+        args: [--enforce-all]
       - id: check-ast
       - id: check-builtin-literals
       - id: check-case-conflict
@@ -24,15 +24,15 @@ repos:
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-aws-credentials
-        args: [ --allow-missing-credentials ]
+        args: [--allow-missing-credentials]
       - id: detect-private-key
       - id: fix-byte-order-marker
       - id: forbid-new-submodules
       - id: forbid-submodules
       - id: mixed-line-ending
-        args: [ --fix=no ]
+        args: [--fix=no]
       - id: name-tests-test
-        args: [ --pytest-test-first ]
+        args: [--pytest-test-first]
       - id: no-commit-to-branch
       - id: pretty-format-json
       - id: requirements-txt-fixer
