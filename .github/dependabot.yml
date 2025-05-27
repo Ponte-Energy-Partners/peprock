@@ -12,7 +12,7 @@ updates:
     allow:
       - dependency-type: "all"
 
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
