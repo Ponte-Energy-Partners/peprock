@@ -1,5 +1,3 @@
-# ruff: noqa: FBT003
-
 import datetime
 import re
 import typing
