@@ -11,7 +11,7 @@ name = "peprock"
 version = "1.7.8"
 description = "Foundational Python library"
 readme = "README.md"
-requires-python = ">=3.10,<3.14"
+requires-python = ">=3.10"
 license = "MIT"
 authors = [
     { "name" = "Jakob Keller", "email" = "57402305+jakob-keller@users.noreply.github.com" },
@@ -34,6 +34,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Typing :: Typed",
 ]
 dependencies = [
@@ -43,7 +44,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "coverage[toml] >=7.2.1,<8.0.0",
-    "mypy[faster-cache] >=1.15.0,<2.0.0",
+    "mypy >=1.15.0,<2.0.0",
     "pre-commit >=4.0.1,<5.0.0",
     "pdoc3 >=0.11.1,<0.12.0",
     "pytest >=8.0.0,<8.3.5",
