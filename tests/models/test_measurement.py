@@ -269,7 +269,6 @@ def test_eq(
     measurement_plus_one_prefix_shift_up,
     measurement_other_unit,
 ):
-    # noinspection DuplicatedCode
     assert measurement == measurement
     assert not measurement == measurement_plus_one
     assert not measurement == measurement_plus_one_prefix_shift_up
@@ -499,7 +498,6 @@ def test_floordiv(
     with pytest.raises(TypeError):
         measurement // "test"
     with pytest.raises(TypeError):
-        # noinspection PyUnresolvedReferences
         "test" // measurement
 
     # combine measurement with integer
@@ -546,7 +544,6 @@ def test_floordiv(
     if measurement.magnitude:
         assert measurement // measurement == 1
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement // measurement
 
@@ -557,7 +554,6 @@ def test_floordiv(
             == measurement.magnitude // measurement_plus_one.magnitude
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement // measurement_plus_one
     if measurement.magnitude:
@@ -566,7 +562,6 @@ def test_floordiv(
             == measurement_plus_one.magnitude // measurement.magnitude
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement_plus_one // measurement
 
@@ -576,7 +571,6 @@ def test_floordiv(
             measurement_prefix_shift.magnitude * 1000
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement // measurement_prefix_shift
     if measurement.magnitude:
@@ -585,7 +579,6 @@ def test_floordiv(
             == (measurement_prefix_shift.magnitude * 1000) // measurement.magnitude
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement_prefix_shift // measurement
 
@@ -615,7 +608,6 @@ def test_mod(
             magnitude=0,
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement % measurement
 
@@ -626,7 +618,6 @@ def test_mod(
             magnitude=measurement.magnitude % measurement_plus_one.magnitude,
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement % measurement_plus_one
     if measurement.magnitude:
@@ -635,7 +626,6 @@ def test_mod(
             magnitude=measurement_plus_one.magnitude % measurement.magnitude,
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement_plus_one % measurement
 
@@ -647,7 +637,6 @@ def test_mod(
             % (measurement_prefix_shift.magnitude * 1000),
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement % measurement_prefix_shift
     if measurement.magnitude:
@@ -657,7 +646,6 @@ def test_mod(
             % measurement.magnitude,
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement_prefix_shift % measurement
 
@@ -686,7 +674,6 @@ def test_mul(measurement):
 
     # combine measurement with float
     other = 32.1
-    # noinspection DuplicatedCode
     if isinstance(measurement.magnitude, decimal.Decimal):
         with pytest.raises(TypeError):
             measurement * other
@@ -717,7 +704,6 @@ def test_mul(measurement):
 
     # combine measurement with Fraction
     other = fractions.Fraction(32.1)
-    # noinspection DuplicatedCode
     if isinstance(measurement.magnitude, decimal.Decimal):
         with pytest.raises(TypeError):
             measurement * other
@@ -760,7 +746,6 @@ def test_sub(
     with pytest.raises(TypeError):
         measurement - "test"
     with pytest.raises(TypeError):
-        # noinspection PyUnresolvedReferences
         "test" - measurement
 
     # combine measurement with self
@@ -806,7 +791,6 @@ def test_truediv(
     with pytest.raises(TypeError):
         measurement / "test"
     with pytest.raises(TypeError):
-        # noinspection PyUnresolvedReferences
         "test" / measurement
 
     # combine measurement with integer
@@ -853,7 +837,6 @@ def test_truediv(
     if measurement.magnitude:
         assert measurement / measurement == 1
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement / measurement
 
@@ -864,7 +847,6 @@ def test_truediv(
             == measurement.magnitude / measurement_plus_one.magnitude
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement / measurement_plus_one
     if measurement.magnitude:
@@ -873,7 +855,6 @@ def test_truediv(
             == measurement_plus_one.magnitude / measurement.magnitude
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement_plus_one / measurement
 
@@ -883,7 +864,6 @@ def test_truediv(
             measurement_prefix_shift.magnitude * 1000
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement / measurement_prefix_shift
     if measurement.magnitude:
@@ -892,7 +872,6 @@ def test_truediv(
             == (measurement_prefix_shift.magnitude * 1000) / measurement.magnitude
         )
     else:
-        # noinspection PyTypeChecker
         with pytest.raises((ZeroDivisionError, decimal.InvalidOperation)):
             measurement_prefix_shift / measurement
 

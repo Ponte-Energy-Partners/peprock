@@ -26,7 +26,6 @@ import datetime
 import functools
 
 
-# noinspection PyTypeChecker
 @functools.singledispatch
 def is_naive(arg: datetime.date | datetime.time | datetime.datetime, /) -> bool:
     """Determine if arg is timezone naive and return a bool."""
