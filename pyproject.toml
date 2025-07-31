@@ -1,13 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.sdist]
-only-include = ["src/peprock"]
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/peprock"]
-
+requires = ["uv_build>=0.8.4,<0.9.0"]
+build-backend = "uv_build"
 
 [project]
 name = "peprock"
@@ -16,6 +9,9 @@ description = "Foundational Python library"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
+license-files = [
+    "LICENSE",
+]
 authors = [
     { "name" = "Jakob Keller", "email" = "57402305+jakob-keller@users.noreply.github.com" },
 ]
@@ -66,7 +62,7 @@ version_provider = "pep621"
 update_changelog_on_bump = true
 bump_message = "chore: bump version to $new_version"
 pre_bump_hooks = [
-  "uv lock && git add uv.lock",
+    "uv lock && git add uv.lock",
 ]
 changelog_incremental = true
 
@@ -139,3 +135,11 @@ force-wrap-aliases = true
 
 [tool.uv]
 required-version = ">=0.8.4"
+
+[tool.uv.build-backend]
+module-name = [
+    "peprock.datetime",
+    "peprock.models",
+    "peprock.patterns",
+    "peprock.subclasses",
+]
