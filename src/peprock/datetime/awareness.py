@@ -20,8 +20,6 @@ True
 
 """
 
-from __future__ import annotations
-
 import datetime
 import functools
 
@@ -59,7 +57,7 @@ class EnsureAwareError(ValueError):
     """Unable to ensure awareness."""
 
     def __init__(
-        self: EnsureAwareError,
+        self: "EnsureAwareError",
         arg: datetime.datetime,
         /,
         *,
