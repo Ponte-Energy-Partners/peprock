@@ -117,6 +117,7 @@ ignore = [
     "ANN", # flake8-annotations
     "D", # pydocstyle
     "FBT001", # boolean-type-hint-positional-argument
+    "INP001", # implicit-namespace-package
     "PLR0912", # too-many-branches
     "PLR0913", # too-many-arguments
     "PLR0915", # too-many-statements
