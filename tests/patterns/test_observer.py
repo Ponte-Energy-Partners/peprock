@@ -14,7 +14,6 @@ class _IntFloatSubject(peprock.patterns.Subject[int, float]):
 
 
 class _StrObserver(peprock.patterns.Observer[str]):
-    # noinspection PyMethodOverriding
     def notify(
         self: peprock.patterns.Observer[str],
         __subject: peprock.patterns.Subject[str],
@@ -25,7 +24,6 @@ class _StrObserver(peprock.patterns.Observer[str]):
 
 
 class _IntFloatObserver(peprock.patterns.Observer[int, float]):
-    # noinspection PyMethodOverriding
     def notify(
         self: peprock.patterns.Observer[int, float],
         __subject: peprock.patterns.Subject[int, float],

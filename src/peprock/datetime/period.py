@@ -66,10 +66,8 @@ class Period(
         """Return True if item is in period."""
         match item:
             case Period():
-                # noinspection PyUnresolvedReferences
                 return self.start <= item.start and item.end <= self.end
             case datetime.datetime():
-                # noinspection PyTypeChecker
                 return self.start <= item <= self.end
 
         msg: str = f"expected peprock.datetime.Period | datetime.datetime, got {item!r}"
