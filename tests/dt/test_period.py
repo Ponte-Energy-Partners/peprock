@@ -8,7 +8,7 @@ import pytest
 
 import peprock.dt
 
-_OFFSET: typing.Final[datetime.timedelta] = peprock.dt.ONE_HOUR
+_OFFSET: typing.Final[datetime.timedelta] = datetime.timedelta(hours=1)
 _NAIVE_DATETIME_1: typing.Final[datetime.datetime] = datetime.datetime(
     2023,
     12,
