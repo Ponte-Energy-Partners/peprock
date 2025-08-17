@@ -1,3 +1,14 @@
+## 2.0.0 (2025-08-17)
+
+### Feat
+
+- **dt**: remove timedelta constants from `peprock.dt` (formerly `peprock.datetime`)
+- **dt**: rename package `peprock.datetime` to `peprock.dt`
+
+### Refactor
+
+- **datetime**: avoid `from __future__ import annotations`
+
 ## 1.9.0 (2025-07-31)
 
 ## 1.8.0 (2025-07-03)
