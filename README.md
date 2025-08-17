@@ -11,7 +11,7 @@ Foundational Python library
 
 **peprock** is a collection of versatile Python libraries, provided as namespace packages:
 
--   **[peprock.dt][]**: Date/time and related helpers and constants.
+-   **[peprock.dt][]**: Date/time and related models and helpers.
 -   **[peprock.models][]**: General purpose model classes.
 -   **[peprock.patterns][]**: Reusable software design patterns.
 -   **[peprock.subclasses][]**: Class hierarchy helpers.
