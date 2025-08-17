@@ -6,9 +6,9 @@ import zoneinfo
 
 import pytest
 
-import peprock.datetime
+import peprock.dt
 
-_OFFSET: typing.Final[datetime.timedelta] = peprock.datetime.ONE_HOUR
+_OFFSET: typing.Final[datetime.timedelta] = peprock.dt.ONE_HOUR
 _NAIVE_DATETIME_1: typing.Final[datetime.datetime] = datetime.datetime(
     2023,
     12,
@@ -134,7 +134,7 @@ class TestGenericPeriod:
         end,
         expected,
     ) -> None:
-        period = peprock.datetime.Period(start=start, end=end)
+        period = peprock.dt.Period(start=start, end=end)
         assert period.start is start
         assert period.end is end
 
@@ -153,7 +153,7 @@ class TestGenericPeriod:
         [
             (
                 _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
@@ -161,7 +161,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_1 - _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
@@ -169,7 +169,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_1,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
@@ -177,7 +177,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_2,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
@@ -185,7 +185,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_1 - _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
@@ -193,7 +193,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_1,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
@@ -201,7 +201,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_2,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
@@ -209,7 +209,7 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_2 + _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
@@ -217,95 +217,95 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_1,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
                 TypeError,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1 - _OFFSET,
                     end=_NAIVE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1 - _OFFSET,
                     end=_NAIVE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2 + _OFFSET,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
@@ -313,7 +313,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_1 - _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
@@ -321,7 +321,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_1,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
@@ -329,7 +329,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_2,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
@@ -337,7 +337,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_1 - _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
@@ -345,7 +345,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_1,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
@@ -353,7 +353,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_2,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
@@ -361,7 +361,7 @@ class TestGenericPeriod:
             ),
             (
                 _AWARE_DATETIME_2 + _OFFSET,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
@@ -369,128 +369,128 @@ class TestGenericPeriod:
             ),
             (
                 _NAIVE_DATETIME_1,
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
                 TypeError,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1 - _OFFSET,
                     end=_AWARE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1 - _OFFSET,
                     end=_AWARE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_1,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2 + _OFFSET,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
                 False,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                     end=_AWARE_DATETIME_2.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                     end=_AWARE_DATETIME_2.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                     end=_AWARE_DATETIME_2.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                     end=_AWARE_DATETIME_2.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
                 ),
                 True,
             ),
             (
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_NAIVE_DATETIME_1,
                     end=_NAIVE_DATETIME_2,
                 ),
-                peprock.datetime.Period(
+                peprock.dt.Period(
                     start=_AWARE_DATETIME_1,
                     end=_AWARE_DATETIME_2,
                 ),
