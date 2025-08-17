@@ -70,7 +70,7 @@ class Period(
             case datetime.datetime():
                 return self.start <= item <= self.end
 
-        msg: str = f"expected peprock.datetime.Period | datetime.datetime, got {item!r}"
+        msg: str = f"expected peprock.dt.Period | datetime.datetime, got {item!r}"
         raise TypeError(msg)
 
 

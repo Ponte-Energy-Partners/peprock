@@ -5,7 +5,7 @@ import zoneinfo
 
 import pytest
 
-import peprock.datetime
+import peprock.dt
 
 _DATE: typing.Final[datetime.date] = datetime.date(
     year=2023,
@@ -110,12 +110,12 @@ def test_is_naive_is_aware(arg: typing.Any, is_naive: bool | None) -> None:
                 + "$"
             )
             with pytest.raises(TypeError, match=match):
-                peprock.datetime.is_naive(arg)
+                peprock.dt.is_naive(arg)
             with pytest.raises(TypeError, match=match):
-                peprock.datetime.is_aware(arg)
+                peprock.dt.is_aware(arg)
         case _:
-            assert peprock.datetime.is_naive(arg) == is_naive
-            assert peprock.datetime.is_aware(arg) != is_naive
+            assert peprock.dt.is_naive(arg) == is_naive
+            assert peprock.dt.is_aware(arg) != is_naive
 
 
 @pytest.mark.parametrize(
@@ -143,9 +143,9 @@ def test_is_naive_is_aware(arg: typing.Any, is_naive: bool | None) -> None:
     ],
 )
 def test_ensure_aware(arg, assumed_tz, target_tz) -> None:
-    if peprock.datetime.is_naive(arg) and assumed_tz is None:
-        with pytest.raises(peprock.datetime.EnsureAwareError):
-            peprock.datetime.ensure_aware(
+    if peprock.dt.is_naive(arg) and assumed_tz is None:
+        with pytest.raises(peprock.dt.EnsureAwareError):
+            peprock.dt.ensure_aware(
                 arg,
                 assumed_tz=assumed_tz,
                 target_tz=target_tz,
@@ -157,7 +157,7 @@ def test_ensure_aware(arg, assumed_tz, target_tz) -> None:
         if target_tz:
             expected = expected.astimezone(target_tz)
         assert (
-            peprock.datetime.ensure_aware(
+            peprock.dt.ensure_aware(
                 arg,
                 assumed_tz=assumed_tz,
                 target_tz=target_tz,

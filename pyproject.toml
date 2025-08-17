@@ -18,6 +18,7 @@ authors = [
 keywords = [
     "peprock",
     "datetime",
+    "dt",
     "models",
     "patterns",
     "subclasses",
@@ -139,7 +140,7 @@ required-version = ">=0.8.4"
 
 [tool.uv.build-backend]
 module-name = [
-    "peprock.datetime",
+    "peprock.dt",
     "peprock.models",
     "peprock.patterns",
     "peprock.subclasses",
