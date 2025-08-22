@@ -81,7 +81,7 @@ jobs:
       - name: Build documentation
         run: uv run pdoc --html peprock
       - name: Upload documentation
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "html/peprock"
       - name: Deploy to GitHub Pages
