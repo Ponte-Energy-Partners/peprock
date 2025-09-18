@@ -56,7 +56,7 @@ class Subject(typing.Generic[_P]):
             observer.notify(self, *args, **kwargs)
 
 
-class Observer(typing.Generic[_P], abc.ABC):
+class Observer(abc.ABC, typing.Generic[_P]):
     """Receive notifications from subjects after registration."""
 
     @abc.abstractmethod
