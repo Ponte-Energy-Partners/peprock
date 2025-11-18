@@ -93,13 +93,18 @@ warn_unused_configs = true
 warn_unreachable = true
 
 
-[tool.pytest.ini_options]
-addopts = "--doctest-modules --import-mode=importlib"
+[tool.pytest]
+addopts = [
+    "-p", "no:terminalprogress",
+    "--doctest-modules",
+]
 filterwarnings = [
     "error",
 ]
-minversion = "8.0"
-xfail_strict = true
+minversion = "9.0"
+strict_config = true
+strict_markers = true
+strict_xfail = true
 
 
 [tool.ruff]
