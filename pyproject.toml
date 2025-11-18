@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.8.4,<0.9.0"]
+requires = ["uv_build>=0.8.4,<0.10.0"]
 build-backend = "uv_build"
 
 [project]
@@ -47,7 +47,7 @@ dev = [
     "mypy >=1.15.0,<2.0.0",
     "pre-commit >=4.0.1,<5.0.0",
     "pdoc3 >=0.11.1,<0.12.0",
-    "pytest >=8.0.0,<9.0.0",
+    "pytest >=9.0.0,<10.0.0",
     "pytest-cov >=6.0.0,<8.0.0",
     "ruff >=0.13.0,<0.15.0",
 ]
@@ -93,13 +93,18 @@ warn_unused_configs = true
 warn_unreachable = true
 
 
-[tool.pytest.ini_options]
-addopts = "--doctest-modules --import-mode=importlib"
+[tool.pytest]
+addopts = [
+    "-p", "no:terminalprogress",
+    "--doctest-modules",
+]
 filterwarnings = [
     "error",
 ]
-minversion = "8.0"
-xfail_strict = true
+minversion = "9.0"
+strict_config = true
+strict_markers = true
+strict_xfail = true
 
 
 [tool.ruff]
