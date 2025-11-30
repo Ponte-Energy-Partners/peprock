@@ -59,12 +59,9 @@ Documentation = "https://api.peprock.ponte.energy"
 
 
 [tool.commitizen]
-version_provider = "pep621"
+version_provider = "uv"
 update_changelog_on_bump = true
 bump_message = "chore: bump version to $new_version"
-pre_bump_hooks = [
-    "uv lock && git add uv.lock",
-]
 changelog_incremental = true
 
 

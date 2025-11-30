@@ -57,7 +57,6 @@ jobs:
         uses: commitizen-tools/commitizen-action@bb4f1df6601e2a1a891506581b0c53acdc88e07d  # 0.26.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          extra_requirements: "uv==${{ steps.uv.outputs.uv-version }}"
           increment: ${{ inputs.increment }}
           check_consistency: true
       - name: Build package
