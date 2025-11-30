@@ -1,3 +1,13 @@
+## 2.0.1 (2025-11-30)
+
+### Refactor
+
+- **patterns**: flip base classes of `peprock.patterns.Observer`
+
+### Perf
+
+- **subclasses**: optimize `get()`
+
 ## 2.0.0 (2025-08-17)
 
 ### Feat
