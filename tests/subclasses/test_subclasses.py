@@ -54,19 +54,19 @@ class _C2(_B1, abc.ABC):
 
 
 @pytest.mark.parametrize(
-    ("base_class", "exclude_abstract", "recursive", "expected"),
+    ("base_class", "recursive", "exclude_abstract", "expected"),
     [
         (_A1, False, False, {_B1, _B2, _B3, _B4}),
-        (_A1, False, True, {_B1, _B2, _B3, _B4, _C1, _C2}),
-        (_A1, True, False, {_B1, _B4}),
+        (_A1, False, True, {_B1, _B4}),
+        (_A1, True, False, {_B1, _B2, _B3, _B4, _C1, _C2}),
         (_A1, True, True, {_B1, _B4, _C1}),
         (_A2, False, False, {_B3, _B4, _B5, _B6}),
-        (_A2, False, True, {_B3, _B4, _B5, _B6}),
-        (_A2, True, False, {_B4, _B6}),
+        (_A2, False, True, {_B4, _B6}),
+        (_A2, True, False, {_B3, _B4, _B5, _B6}),
         (_A2, True, True, {_B4, _B6}),
         (_B1, False, False, {_C1, _C2}),
-        (_B1, False, True, {_C1, _C2}),
-        (_B1, True, False, {_C1}),
+        (_B1, False, True, {_C1}),
+        (_B1, True, False, {_C1, _C2}),
         (_B1, True, True, {_C1}),
         (_B2, False, False, set()),
         (_B2, False, True, set()),
@@ -78,12 +78,12 @@ class _C2(_B1, abc.ABC):
         (_C1, True, True, set()),
     ],
 )
-def test_get(base_class, exclude_abstract, recursive, expected):
+def test_get(base_class, recursive, exclude_abstract, expected):
     assert (
         peprock.subclasses.get(
             base_class,
-            exclude_abstract=exclude_abstract,
             recursive=recursive,
+            exclude_abstract=exclude_abstract,
         )
         == expected
     )
