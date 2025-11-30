@@ -26,29 +26,29 @@ if typing.TYPE_CHECKING:
 __version__ = importlib.metadata.version("peprock")
 
 
+def _collect_recursive(baseclasses: list[type[T_co]]) -> None:
+    for baseclass in baseclasses.copy():
+        if subclasses := baseclass.__subclasses__():
+            _collect_recursive(subclasses)
+            baseclasses.extend(subclasses)
+
+
 def get(
     base_class: type[T_co],
     *,
-    exclude_abstract: bool = False,
     recursive: bool = False,
+    exclude_abstract: bool = False,
 ) -> set[type[T_co]]:
     """Identify subclasses of base_class and return a set."""
-    subclasses: set[type[T_co]] = set()
+    subclasses = base_class.__subclasses__()
 
-    for subclass in base_class.__subclasses__():
-        if recursive:
-            subclasses |= get(
-                subclass,
-                exclude_abstract=exclude_abstract,
-                recursive=recursive,
-            )
+    if recursive:
+        _collect_recursive(subclasses)
 
-        if exclude_abstract and inspect.isabstract(subclass):
-            continue
+    if exclude_abstract:
+        return {subclass for subclass in subclasses if not inspect.isabstract(subclass)}
 
-        subclasses.add(subclass)
-
-    return subclasses
+    return set(subclasses)
 
 
 def get_by_name(
