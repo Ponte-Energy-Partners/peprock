@@ -9,6 +9,7 @@ repos:
       - id: check-case-conflict
       - id: check-executables-have-shebangs
       - id: check-json
+      - id: check-json5
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
@@ -40,11 +41,11 @@ repos:
       - id: pretty-format-json
       - id: requirements-txt-fixer
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.9.18
+    rev: 0.9.27
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.10
+    rev: v0.14.14
     hooks:
       - id: ruff-format
       - id: ruff
@@ -53,16 +54,16 @@ repos:
     hooks:
       - id: mypy
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.10.1
+    rev: v4.12.1
     hooks:
       - id: commitizen
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.37.1
+    rev: v1.38.0
     hooks:
       - id: yamllint
         args: [--config-data, relaxed]
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.0
+    rev: 0.36.1
     hooks:
       - id: check-dependabot
       - id: check-github-workflows
