@@ -5,7 +5,7 @@ repos:
   - repo: builtin
     hooks:
       - id: check-added-large-files
-        args: [--enforce-all]
+        args: [ --enforce-all ]
       - id: check-case-conflict
       - id: check-executables-have-shebangs
       - id: check-json
@@ -16,9 +16,10 @@ repos:
       - id: check-xml
       - id: check-yaml
       - id: detect-private-key
+      - id: end-of-file-fixer
       - id: fix-byte-order-marker
       - id: mixed-line-ending
-        args: [--fix=no]
+        args: [ --fix=no ]
       - id: no-commit-to-branch
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -33,19 +34,22 @@ repos:
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-aws-credentials
-        args: [--allow-missing-credentials]
+        args: [ --allow-missing-credentials ]
+      # - id: double-quote-string-fixer
+      # - id: file-contents-sorter
       - id: forbid-new-submodules
       - id: forbid-submodules
       - id: name-tests-test
-        args: [--pytest-test-first]
+        args: [ --pytest-test-first ]
       - id: pretty-format-json
       - id: requirements-txt-fixer
+      # - id: sort-simple-yaml
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.9.30
+    rev: 0.10.3
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.0
+    rev: v0.15.1
     hooks:
       - id: ruff-format
       - id: ruff-check
@@ -54,16 +58,16 @@ repos:
     hooks:
       - id: mypy
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.13.4
+    rev: v4.13.7
     hooks:
       - id: commitizen
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.38.0
     hooks:
       - id: yamllint
-        args: [--config-data, relaxed]
+        args: [ --config-data, relaxed ]
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.1
+    rev: 0.36.2
     hooks:
       - id: check-dependabot
       - id: check-github-workflows
