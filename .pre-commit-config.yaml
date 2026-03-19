@@ -45,11 +45,11 @@ repos:
       - id: requirements-txt-fixer
       # - id: sort-simple-yaml
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.10.3
+    rev: 0.10.11
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.1
+    rev: v0.15.6
     hooks:
       - id: ruff-format
       - id: ruff-check
@@ -58,7 +58,7 @@ repos:
     hooks:
       - id: mypy
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.13.7
+    rev: v4.13.9
     hooks:
       - id: commitizen
   - repo: https://github.com/adrienverge/yamllint
@@ -67,7 +67,7 @@ repos:
       - id: yamllint
         args: [ --config-data, relaxed ]
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.2
+    rev: 0.37.0
     hooks:
       - id: check-dependabot
       - id: check-github-workflows
