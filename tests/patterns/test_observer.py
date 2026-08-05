@@ -197,16 +197,20 @@ class TestObserver:
                 _IntFloatSubject(),
                 (123,),
                 {},
-                "_IntFloatObserver got int_value=123, float_value=0.0 from "
-                "_IntFloatSubject\n",
+                (
+                    "_IntFloatObserver got int_value=123, float_value=0.0 from "
+                    "_IntFloatSubject\n"
+                ),
             ),
             (
                 _IntFloatObserver(),
                 _IntFloatSubject(),
                 (234, 12.3),
                 {},
-                "_IntFloatObserver got int_value=234, float_value=12.3 from "
-                "_IntFloatSubject\n",
+                (
+                    "_IntFloatObserver got int_value=234, float_value=12.3 from "
+                    "_IntFloatSubject\n"
+                ),
             ),
             (
                 _IntFloatObserver(),
@@ -215,8 +219,10 @@ class TestObserver:
                 {
                     "float_value": 23.4,
                 },
-                "_IntFloatObserver got int_value=345, float_value=23.4 from "
-                "_IntFloatSubject\n",
+                (
+                    "_IntFloatObserver got int_value=345, float_value=23.4 from "
+                    "_IntFloatSubject\n"
+                ),
             ),
             (
                 _IntFloatObserver(),
@@ -225,8 +231,10 @@ class TestObserver:
                 {
                     "int_value": 456,
                 },
-                "_IntFloatObserver got int_value=456, float_value=0.0 from "
-                "_IntFloatSubject\n",
+                (
+                    "_IntFloatObserver got int_value=456, float_value=0.0 from "
+                    "_IntFloatSubject\n"
+                ),
             ),
             (
                 _IntFloatObserver(),
@@ -236,8 +244,10 @@ class TestObserver:
                     "int_value": 567,
                     "float_value": 34.5,
                 },
-                "_IntFloatObserver got int_value=567, float_value=34.5 from "
-                "_IntFloatSubject\n",
+                (
+                    "_IntFloatObserver got int_value=567, float_value=34.5 from "
+                    "_IntFloatSubject\n"
+                ),
             ),
         ],
     )
