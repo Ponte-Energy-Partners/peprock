@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.8.4,<0.12.0"]
+requires = ["uv_build>=0.8.4,<0.13.0"]
 build-backend = "uv_build"
 
 [project]
@@ -45,11 +45,11 @@ dependencies = [
 dev = [
     "coverage[toml] >=7.2.1,<8.0.0",
     "mypy >=1.15.0,<3.0.0",
-    "prek >=0.3.8,<0.5.0",
+    "prek >=0.4.11,<0.5.0",
     "pdoc3 >=0.11.1,<0.12.0",
     "pytest >=9.0.2,<10.0.0",
     "pytest-cov >=6.0.0,<8.0.0",
-    "ruff >=0.15.9,<0.16.0",
+    "ruff >=0.16.0,<0.17.0",
 ]
 
 [project.urls]
@@ -110,6 +110,7 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "CPY001", # missing-copyright-notice
     "D203", # one-blank-line-before-class
     "D213", # multi-line-summary-second-line
 ]
@@ -123,6 +124,7 @@ ignore = [
     "PLR0912", # too-many-branches
     "PLR0913", # too-many-arguments
     "PLR0915", # too-many-statements
+    "PLR0917", # too-many-positional-arguments
     "S101", # assert
     "SLF001", # private-member-access
     "T201", # print-found

@@ -66,9 +66,18 @@ jobs:
           JOB_STATUS: ${{ job.status }}
 
   zizmor:
-    name: 🌈 zizmor
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
+    timeout-minutes: 5
 
-    # yamllint disable-line rule:line-length
-    uses: zizmorcore/workflow/.github/workflows/reusable-zizmor.yml@3bb5e95068d0f44b6d2f3f7e91379bed1d2f96a8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor 🌈
+        uses: zizmorcore/zizmor-action@3dc1ecc9bcb9e94e9b2c709687979e1298497054 # v0.6.2
+        with:
+          version: 'v1.28.0' # TODO: unpin after release >v1.29.0
