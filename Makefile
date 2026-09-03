@@ -6,7 +6,7 @@ environment:
 	uv run prek install
 
 bump_dependencies:
-	uv run prek auto-update --no-progress
+	uv run prek update --no-progress
 	@echo
 	uv sync --upgrade
 	uv pip list --outdated --strict

@@ -1,4 +1,4 @@
-auto_update:
+update:
   cooldown_days: 7
   freeze: true
 default_install_hook_types:
@@ -48,20 +48,20 @@ repos:
         args: [ --pytest-test-first ]
       # - id: sort-simple-yaml
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 8ff2449591c8de025b17661ba76d60237a1ae62b  # frozen: 0.12.1
+    rev: 856f55170f70dc7523c45a215ecdedc44709e2a6  # frozen: 0.12.6
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 39d9ac5938dadb73df0564a45f163e25ff9fa6e2  # frozen: v0.16.1
+    rev: 1f1e8bf348ff38fc88619a38d3ca4d9c56abea49  # frozen: v0.16.5
     hooks:
       - id: ruff-format
       - id: ruff-check
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: 41e691678310dfd3833f7ab4e180ddb014310356  # frozen: v2.3.0
+    rev: 7ff8d35ae36a7d2b968f2f90b4c723e292e594ee  # frozen: v2.3.1
     hooks:
       - id: mypy
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: 93c7b51d860138c34a0613756c0151209b88d56f  # frozen: v4.17.0
+    rev: d910b66e2686a3ef6c3f438dec0f63ba3cf8d7ee  # frozen: v4.18.0
     hooks:
       - id: commitizen
   - repo: https://github.com/adrienverge/yamllint
@@ -70,7 +70,7 @@ repos:
       - id: yamllint
         args: [ --config-data, relaxed ]
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 6b63472e72e1a91ed8a2f6d483790dfb644fa1d3  # frozen: 0.37.4
+    rev: 12e63946db2c5cfcc9030fac21c3883ba88c6ed8  # frozen: 0.38.0
     hooks:
       - id: check-dependabot
       - id: check-github-workflows
