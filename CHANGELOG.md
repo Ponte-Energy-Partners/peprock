@@ -1,3 +1,9 @@
+## 2.1.0 (2026-09-15)
+
+### Feat
+
+- **python**: drop support for Python 3.10 and require Python 3.11+
+
 ## 2.0.3 (2026-05-09)
 
 ## 2.0.2 (2026-03-19)
