@@ -48,11 +48,11 @@ repos:
         args: [ --pytest-test-first ]
       # - id: sort-simple-yaml
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 856f55170f70dc7523c45a215ecdedc44709e2a6  # frozen: 0.12.6
+    rev: 7720020191168f707a43279c65b6bf9cdf7ed04e  # frozen: 0.12.10
     hooks:
       - id: uv-lock
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 1f1e8bf348ff38fc88619a38d3ca4d9c56abea49  # frozen: v0.16.5
+    rev: 321478e58f4938179c6b86e4ddfa923d1547a49b  # frozen: v0.16.6
     hooks:
       - id: ruff-format
       - id: ruff-check
