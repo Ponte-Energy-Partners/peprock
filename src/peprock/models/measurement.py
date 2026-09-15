@@ -30,12 +30,6 @@ from .unit import Unit
 
 if typing.TYPE_CHECKING:
     import collections.abc
-    import sys
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        from typing_extensions import Self
 
 
 _T = typing.TypeVar("_T")
@@ -64,7 +58,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
     unit: Unit | str | None = None
 
     @functools.cached_property
-    def _unit_symbol(self: Self) -> str:
+    def _unit_symbol(self: typing.Self) -> str:
         match self.unit:
             case None | Unit.one:
                 return ""
@@ -73,7 +67,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
             case _:
                 return self.unit
 
-    def __format__(self: Self, format_spec: str) -> str:
+    def __format__(self: typing.Self, format_spec: str) -> str:
         """Format measurement and return str."""
         if self.prefix.symbol or (self.unit and self.unit is not Unit.one):
             return (
@@ -84,19 +78,19 @@ class Measurement(typing.Generic[_MagnitudeT]):
         return format(self.magnitude, format_spec)
 
     @functools.cached_property
-    def _str(self: Self) -> str:
+    def _str(self: typing.Self) -> str:
         return format(self)
 
-    def __str__(self: Self) -> str:
+    def __str__(self: typing.Self) -> str:
         """Return str(self)."""
         return self._str
 
     @classmethod
     @functools.cache
-    def _init_field_names(cls: type[Self]) -> tuple[str, ...]:
+    def _init_field_names(cls: type[typing.Self]) -> tuple[str, ...]:
         return tuple(field.name for field in dataclasses.fields(cls) if field.init)
 
-    def replace(self: Self, **changes: typing.Any) -> Self:
+    def replace(self: typing.Self, **changes: typing.Any) -> typing.Self:
         """Return a new object replacing specified fields with new values."""
         return type(self)(
             **{
@@ -111,7 +105,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     @typing.overload
     def _apply_operator(
-        self: Self,
+        self: typing.Self,
         __other: Measurement[_MagnitudeS],
         __operator: collections.abc.Callable[
             [_MagnitudeT | float, _MagnitudeS | float],
@@ -124,7 +118,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     @typing.overload
     def _apply_operator(
-        self: Self,
+        self: typing.Self,
         __other: object,
         __operator: collections.abc.Callable[[_MagnitudeT | float, object], _T],
         /,
@@ -134,7 +128,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
     @typing.overload
     def _apply_operator(
-        self: Self,
+        self: typing.Self,
         __other: Measurement[_MagnitudeS],
         __operator: collections.abc.Callable[
             [_MagnitudeT | float, _MagnitudeS | float],
@@ -143,7 +137,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
         /,
         *,
         wrap_in_measurement: typing.Literal[True],
-    ) -> Self: ...
+    ) -> typing.Self: ...
 
     def _apply_operator(  # noqa: PLR0911
         self,
@@ -195,39 +189,39 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
         return NotImplemented
 
-    def __lt__(self: Self, other: Measurement) -> bool:
+    def __lt__(self: typing.Self, other: Measurement) -> bool:
         """Return self < other."""
         return self._apply_operator(other, operator.lt)
 
-    def __le__(self: Self, other: Measurement) -> bool:
+    def __le__(self: typing.Self, other: Measurement) -> bool:
         """Return self <= other."""
         return self._apply_operator(other, operator.le)
 
-    def __eq__(self: Self, other: object) -> bool:
+    def __eq__(self: typing.Self, other: object) -> bool:
         """Return self == other."""
         return self._apply_operator(other, operator.eq)
 
-    def __ne__(self: Self, other: object) -> bool:
+    def __ne__(self: typing.Self, other: object) -> bool:
         """Return self != other."""
         return self._apply_operator(other, operator.ne)
 
-    def __gt__(self: Self, other: Measurement) -> bool:
+    def __gt__(self: typing.Self, other: Measurement) -> bool:
         """Return self > other."""
         return self._apply_operator(other, operator.gt)
 
-    def __ge__(self: Self, other: Measurement) -> bool:
+    def __ge__(self: typing.Self, other: Measurement) -> bool:
         """Return self >= other."""
         return self._apply_operator(other, operator.ge)
 
     @functools.cached_property
-    def _hash(self: Self) -> int:
+    def _hash(self: typing.Self) -> int:
         return hash((self.prefix.convert(self.magnitude), self.unit))
 
-    def __hash__(self: Self) -> int:
+    def __hash__(self: typing.Self) -> int:
         """Return hash(self)."""
         return self._hash
 
-    def __abs__(self: Self) -> Self:
+    def __abs__(self: typing.Self) -> typing.Self:
         """Return abs(self)."""
         return self.replace(
             magnitude=abs(self.magnitude),
@@ -493,13 +487,13 @@ class Measurement(typing.Generic[_MagnitudeT]):
         """Return other * self."""
         return self.__mul__(other)
 
-    def __neg__(self: Self) -> Self:
+    def __neg__(self: typing.Self) -> typing.Self:
         """Return -self."""
         return self.replace(
             magnitude=-self.magnitude,
         )
 
-    def __pos__(self: Self) -> Self:
+    def __pos__(self: typing.Self) -> typing.Self:
         """Return +self."""
         return self.replace(
             magnitude=+self.magnitude,
@@ -645,11 +639,11 @@ class Measurement(typing.Generic[_MagnitudeT]):
 
         return self._apply_operator(other, operator.truediv)
 
-    def __bool__(self: Self) -> bool:
+    def __bool__(self: typing.Self) -> bool:
         """Return True if magnitude is nonzero; otherwise return False."""
         return bool(self.magnitude)
 
-    def __int__(self: Self) -> int:
+    def __int__(self: typing.Self) -> int:
         """Return int(self)."""
         return int(
             (
@@ -659,7 +653,7 @@ class Measurement(typing.Generic[_MagnitudeT]):
             ),
         )
 
-    def __float__(self: Self) -> float:
+    def __float__(self: typing.Self) -> float:
         """Return float(self)."""
         return float(
             (
@@ -670,10 +664,10 @@ class Measurement(typing.Generic[_MagnitudeT]):
         )
 
     @typing.overload
-    def __round__(self: Self) -> Measurement[int]: ...
+    def __round__(self: typing.Self) -> Measurement[int]: ...
 
     @typing.overload
-    def __round__(self: Self, ndigits: int, /) -> Self: ...
+    def __round__(self: typing.Self, ndigits: int, /) -> typing.Self: ...
 
     def __round__(self, ndigits=None, /):
         """Return round(self)."""

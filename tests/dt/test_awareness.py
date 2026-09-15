@@ -23,7 +23,7 @@ _DATETIME: typing.Final[datetime.datetime] = datetime.datetime.combine(
     time=_TIME,
 )
 
-_UTC_TZINFO: typing.Final[datetime.tzinfo] = datetime.timezone.utc
+_UTC_TZINFO: typing.Final[datetime.tzinfo] = datetime.UTC
 _FIXED_OFFSET_ZONE_INFO: typing.Final[zoneinfo.ZoneInfo] = zoneinfo.ZoneInfo(
     "Etc/GMT+10",
 )

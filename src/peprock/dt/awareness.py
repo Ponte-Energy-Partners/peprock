@@ -11,7 +11,7 @@ True
 >>> is_aware(naive)
 False
 
->>> aware = ensure_aware(naive, assumed_tz=datetime.timezone.utc)
+>>> aware = ensure_aware(naive, assumed_tz=datetime.UTC)
 >>> is_naive(aware)
 False
 >>> is_aware(aware)

@@ -19,7 +19,7 @@ _NAIVE_DATETIME_1: typing.Final[datetime.datetime] = datetime.datetime(
 )
 _NAIVE_DATETIME_2: typing.Final[datetime.datetime] = _NAIVE_DATETIME_1 + _OFFSET
 _AWARE_DATETIME_1: typing.Final[datetime.datetime] = _NAIVE_DATETIME_1.replace(
-    tzinfo=datetime.timezone.utc,
+    tzinfo=datetime.UTC,
 )
 _AWARE_DATETIME_2: typing.Final[datetime.datetime] = _AWARE_DATETIME_1 + _OFFSET
 _VARIABLE_OFFSET_ZONE_INFO: typing.Final[zoneinfo.ZoneInfo] = zoneinfo.ZoneInfo(
