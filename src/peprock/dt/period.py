@@ -35,12 +35,7 @@ import collections.abc
 import dataclasses
 import datetime
 import functools
-import sys
-
-if sys.version_info >= (3, 11):
-    from typing import Self  # pragma: no cover
-else:
-    from typing_extensions import Self  # pragma: no cover
+import typing
 
 
 @dataclasses.dataclass(frozen=True)
@@ -53,16 +48,16 @@ class Period(
     end: datetime.datetime
 
     @functools.cached_property
-    def duration(self: Self) -> datetime.timedelta:
+    def duration(self: typing.Self) -> datetime.timedelta:
         """Return duration of period."""
         return self.end - self.start
 
     @functools.cached_property
-    def midpoint(self: Self) -> datetime.datetime:
+    def midpoint(self: typing.Self) -> datetime.datetime:
         """Return midpoint of period."""
         return self.start + self.duration / 2
 
-    def __contains__(self: Self, item: object) -> bool:
+    def __contains__(self: typing.Self, item: object) -> bool:
         """Return True if item is in period."""
         match item:
             case Period():
