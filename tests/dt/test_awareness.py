@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 import re
 import typing
 import zoneinfo
@@ -7,23 +7,23 @@ import pytest
 
 import peprock.dt
 
-_DATE: typing.Final[datetime.date] = datetime.date(
+_DATE: typing.Final[dt.date] = dt.date(
     year=2023,
     month=2,
     day=24,
 )
-_TIME: typing.Final[datetime.time] = datetime.time(
+_TIME: typing.Final[dt.time] = dt.time(
     hour=1,
     minute=2,
     second=3,
     microsecond=4,
 )
-_DATETIME: typing.Final[datetime.datetime] = datetime.datetime.combine(
+_DATETIME: typing.Final[dt.datetime] = dt.datetime.combine(
     date=_DATE,
     time=_TIME,
 )
 
-_UTC_TZINFO: typing.Final[datetime.tzinfo] = datetime.UTC
+_UTC_TZINFO: typing.Final[dt.tzinfo] = dt.UTC
 _FIXED_OFFSET_ZONE_INFO: typing.Final[zoneinfo.ZoneInfo] = zoneinfo.ZoneInfo(
     "Etc/GMT+10",
 )
@@ -31,7 +31,7 @@ _VARIABLE_OFFSET_ZONE_INFO: typing.Final[zoneinfo.ZoneInfo] = zoneinfo.ZoneInfo(
     "Europe/Paris",
 )
 
-_ZONE_INFOS: typing.Final[tuple[datetime.tzinfo, ...]] = (
+_ZONE_INFOS: typing.Final[tuple[dt.tzinfo, ...]] = (
     _UTC_TZINFO,
     _FIXED_OFFSET_ZONE_INFO,
     _VARIABLE_OFFSET_ZONE_INFO,
