@@ -1,6 +1,6 @@
 # ruff: noqa: DTZ001
 
-import datetime
+import datetime as dt
 import typing
 import zoneinfo
 
@@ -8,8 +8,8 @@ import pytest
 
 import peprock.dt
 
-_OFFSET: typing.Final[datetime.timedelta] = datetime.timedelta(hours=1)
-_NAIVE_DATETIME_1: typing.Final[datetime.datetime] = datetime.datetime(
+_OFFSET: typing.Final[dt.timedelta] = dt.timedelta(hours=1)
+_NAIVE_DATETIME_1: typing.Final[dt.datetime] = dt.datetime(
     2023,
     12,
     24,
@@ -17,11 +17,11 @@ _NAIVE_DATETIME_1: typing.Final[datetime.datetime] = datetime.datetime(
     34,
     56,
 )
-_NAIVE_DATETIME_2: typing.Final[datetime.datetime] = _NAIVE_DATETIME_1 + _OFFSET
-_AWARE_DATETIME_1: typing.Final[datetime.datetime] = _NAIVE_DATETIME_1.replace(
-    tzinfo=datetime.UTC,
+_NAIVE_DATETIME_2: typing.Final[dt.datetime] = _NAIVE_DATETIME_1 + _OFFSET
+_AWARE_DATETIME_1: typing.Final[dt.datetime] = _NAIVE_DATETIME_1.replace(
+    tzinfo=dt.UTC,
 )
-_AWARE_DATETIME_2: typing.Final[datetime.datetime] = _AWARE_DATETIME_1 + _OFFSET
+_AWARE_DATETIME_2: typing.Final[dt.datetime] = _AWARE_DATETIME_1 + _OFFSET
 _VARIABLE_OFFSET_ZONE_INFO: typing.Final[zoneinfo.ZoneInfo] = zoneinfo.ZoneInfo(
     "Europe/Paris",
 )
@@ -34,7 +34,7 @@ class TestGenericPeriod:
             (
                 _NAIVE_DATETIME_1,
                 _NAIVE_DATETIME_1,
-                (datetime.timedelta(), _NAIVE_DATETIME_1),
+                (dt.timedelta(), _NAIVE_DATETIME_1),
             ),
             (
                 _NAIVE_DATETIME_1,
@@ -59,7 +59,7 @@ class TestGenericPeriod:
             (
                 _NAIVE_DATETIME_2,
                 _NAIVE_DATETIME_2,
-                (datetime.timedelta(), _NAIVE_DATETIME_2),
+                (dt.timedelta(), _NAIVE_DATETIME_2),
             ),
             (
                 _NAIVE_DATETIME_2,
@@ -84,7 +84,7 @@ class TestGenericPeriod:
             (
                 _AWARE_DATETIME_1,
                 _AWARE_DATETIME_1,
-                (datetime.timedelta(), _AWARE_DATETIME_1),
+                (dt.timedelta(), _AWARE_DATETIME_1),
             ),
             (
                 _AWARE_DATETIME_1,
@@ -109,7 +109,7 @@ class TestGenericPeriod:
             (
                 _AWARE_DATETIME_2,
                 _AWARE_DATETIME_2,
-                (datetime.timedelta(), _AWARE_DATETIME_2),
+                (dt.timedelta(), _AWARE_DATETIME_2),
             ),
             (
                 _AWARE_DATETIME_1.astimezone(_VARIABLE_OFFSET_ZONE_INFO),
