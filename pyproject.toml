@@ -45,7 +45,7 @@ dev = [
     "pdoc3 >=0.11.1,<0.12.0",
     "pytest >=9.0.2,<10.0.0",
     "pytest-cov >=6.0.0,<8.0.0",
-    "ruff >=0.16.0,<0.17.0",
+    "ruff >=0.16.0,<0.18.0",
 ]
 
 [project.urls]
@@ -136,7 +136,7 @@ force-wrap-aliases = true
 
 [tool.uv]
 exclude-newer = "1 week"
-required-version = ">=0.9.17"
+required-version = ">=0.12.22"
 
 [tool.uv.build-backend]
 module-name = [
